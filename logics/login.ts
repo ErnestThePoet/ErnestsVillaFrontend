@@ -3,7 +3,7 @@ import Router from "next/router";
 import APIS from "../modules/apis";
 import userData from "../states/user-data";
 import { message } from "antd";
-import { FormSubmitResult } from "../modules/types";
+import type { FormSubmitResult } from "../modules/types";
 import signupData from "../states/signup-data";
 
 export const tryAutoLogin = () => {

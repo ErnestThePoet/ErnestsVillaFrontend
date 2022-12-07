@@ -1,5 +1,5 @@
 import { Divider } from "antd";
-import styles from "./styles/site-footer.module.scss";
+import styles from "../styles/components/site-footer.module.scss";
 
 export default function SiteFooter() {
     return (

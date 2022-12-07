@@ -1,6 +1,6 @@
 const WITH_TLS_PROXY: boolean = false;
 
-let urlPrefix = "http://localhost:17565/api/";
+let urlPrefix = "http://localhost:17570/api/";
 
 if (WITH_TLS_PROXY) {
     urlPrefix = "http://market.yinkstudio.xyz:17650/api/";
@@ -12,7 +12,9 @@ const APIS = {
     login: "user/login",
     autoLogin: "user/auto_login",
     logout: "user/logout",
-    changePw: "user/change_pw"
+    changePw: "user/change_pw",
+
+    publishItem:"seller/publish"
 };
 
 for (let i in APIS) {

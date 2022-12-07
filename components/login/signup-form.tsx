@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import * as RULES from "../../modules/form-rules";
-import { FormSubmitResult } from "../../modules/types";
+import type { FormSubmitResult } from "../../modules/types";
 
 interface SignupFormProps {
     onFinish: (

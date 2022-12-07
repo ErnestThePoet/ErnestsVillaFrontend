@@ -1,7 +1,8 @@
 import type { AppProps } from "next/app";
-import { ConfigProvider,message } from "antd";
+import { ConfigProvider, message } from "antd";
 // this reset default styles of various elements, including body
 import "antd/dist/reset.css";
+import ChangePwDialog from "../components/change-pw-dialog";
 
 export default function App({ Component, pageProps }: AppProps) {
     const [_, contextHolder] = message.useMessage();
@@ -9,6 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <ConfigProvider theme={{ token: { colorPrimary: "F05355" } }}>
             {contextHolder}
+            <ChangePwDialog />
             <Component {...pageProps} />
         </ConfigProvider>
     );

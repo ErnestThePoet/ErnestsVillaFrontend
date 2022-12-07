@@ -14,6 +14,12 @@ class UserData {
         this.accessId = accessId;
         this.isLoggedIn = true;
     }
+
+    clearUserData() {
+        this.account = "";
+        this.accessId = "";
+        this.isLoggedIn = false;
+    }
 }
 
 export default new UserData();
