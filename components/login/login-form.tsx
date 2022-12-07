@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
-import * as L from "../../logics/login";
 import * as RULES from "../../modules/form-rules";
 import { FormSubmitResult } from "../../modules/types";
 
-export default function LoginForm() {
+interface LoginFormProps {
+    onFinish: (
+        setIsLoggingIn: React.Dispatch<React.SetStateAction<boolean>>,
+        setLoginResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
+    ) => void;
+}
+
+export default function LoginForm(props: LoginFormProps) {
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [loginResult, setLoginResult] = useState<FormSubmitResult>({
         success: false,
@@ -16,8 +22,7 @@ export default function LoginForm() {
         <Form
             name="normal_login"
             initialValues={{ remember: true }}
-            onFinish={() => L.login(setIsLoggingIn, setLoginResult)}>
-            
+            onFinish={() => props.onFinish(setIsLoggingIn, setLoginResult)}>
             <Form.Item name="login_username" rules={RULES.ACCOUNT_RULES}>
                 <Input
                     prefix={<UserOutlined className="site-form-item-icon" />}

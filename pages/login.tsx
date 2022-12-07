@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Tabs } from "antd";
+import * as L from "../logics/login";
 import styles from "../styles/login.module.scss";
 import LoginForm from "../components/login/login-form";
 import SignupForm from "../components/login/signup-form";
@@ -11,12 +12,12 @@ const tabItems = [
     {
         label: "账号登录",
         key: "0",
-        children: <LoginForm />
+        children: <LoginForm onFinish={L.login} />
     },
     {
         label: "立即注册",
         key: "1",
-        children: <SignupForm />
+        children: <SignupForm onFinish={L.signup} />
     }
 ];
 
@@ -26,7 +27,13 @@ export default function LoginPage() {
     const [defaultActiveKey, setDafaultActiveKey] = useState("0");
 
     useEffect(() => {
-        setDafaultActiveKey(router.query.signup ? "1" : "0");
+        if (router.query.signup !== undefined) {
+            setDafaultActiveKey("1");
+        }
+        else {
+            L.tryAutoLogin();
+        }
+        
     }, []);
 
     return (

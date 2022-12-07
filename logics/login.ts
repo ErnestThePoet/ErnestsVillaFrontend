@@ -13,6 +13,7 @@ export const tryAutoLogin = () => {
         axios.postForm(APIS.autoLogin, { sessionId }).then(res => {
             if (res.data.success) {
                 userData.setLoginUserData(res.data.account, res.data.accessId);
+                Router.push("/");
             }
         });
     }
@@ -53,6 +54,8 @@ export const login = (
                     success: true,
                     msg: ""
                 });
+
+                Router.push("/");
             } else {
                 setLoginResult({
                     success: false,
