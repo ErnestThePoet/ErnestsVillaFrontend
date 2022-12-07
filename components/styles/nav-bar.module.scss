@@ -1,0 +1,35 @@
+@import "./common/config";
+@import "./common/theme";
+
+.header {
+    font-size: 12px;
+    padding: 8px 30px;
+    border-bottom: 1px solid #ddd;
+    color: #999;
+    background-color: #e3e4e5;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    [class~="login"] {
+        color: $main-color;
+    }
+
+    [class~="href-no-hover"]{
+        margin: 0 10px;
+        cursor: pointer;
+    }
+
+    [class~="href"]{
+        margin: 0 10px;
+        cursor: pointer;
+        &:hover{
+            color: $main-color;
+        }
+    }
+
+    [class~="divider"]{
+        border-inline-start: 1px solid rgba(5, 5, 5, 0.2) !important;
+    }
+}

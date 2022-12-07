@@ -6,13 +6,13 @@ class UserData {
     }
 
     account: string = "";
-    name: string = "";
     accessId: string = "";
+    isLoggedIn: boolean = false;
 
-    setUserData(account: string, name: string, accessId: string) {
+    setLoginUserData(account: string, accessId: string) {
         this.account = account;
-        this.name = name;
         this.accessId = accessId;
+        this.isLoggedIn = true;
     }
 }
 

@@ -1,0 +1,28 @@
+@import "./common/config";
+@import "./common/theme";
+
+.main {
+    width: 100vw;
+    background-color: #e93854;
+
+    [class~="bkg-wrapper"] {
+        height: 475px;
+        width: 990px;
+        margin: 0 auto;
+        background-image: url("/login-bkg.png");
+        background-repeat: no-repeat;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        [class~="login-wrapper"] {
+            width: 350px;
+            padding: 15px 35px 15px;
+
+            background-color: white;
+
+            box-shadow: 0 6px 20px 0 rgb(37 43 50 / 7%);
+        }
+    }
+}

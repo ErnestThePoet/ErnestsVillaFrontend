@@ -1,21 +1,7 @@
 @import "./common/config";
 @import "./common/theme";
 
-.header {
-    font-size: 12px;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-    background-color: #e3e4e5;
 
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    [class="login"] {
-        color: $main-color;
-        cursor: pointer;
-    }
-}
 
 // .divLogo{
 //   img{
