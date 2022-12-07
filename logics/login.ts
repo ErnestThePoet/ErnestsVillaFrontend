@@ -2,6 +2,7 @@ import axios from "axios";
 import Router from "next/router";
 import APIS from "../modules/apis";
 import userData from "../states/user-data";
+import { useState } from "react";
 import { message } from "antd";
 import { FormSubmitResult } from "../modules/types";
 import signupData from "../states/signup-data";
@@ -20,8 +21,10 @@ export const tryAutoLogin = () => {
 
 export const login = (
     setIsLoggingIn: React.Dispatch<React.SetStateAction<boolean>>,
-    setLoginResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
+    setLoginResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>,
+    messageApi: ReturnType<typeof message.useMessage>[0]
 ) => {
+    message.success(123);
     const account = (<HTMLInputElement>(
         document.getElementById("in-login-account")
     )).value;
@@ -60,13 +63,17 @@ export const login = (
                 });
             }
         })
-        .catch(reason => console.log(reason))
+        .catch(reason => {
+            messageApi.error(reason.message);
+            console.log(reason);
+        })
         .finally(() => setIsLoggingIn(false));
 };
 
 export const signup = (
     setIsSigningUp: React.Dispatch<React.SetStateAction<boolean>>,
-    setSignupResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
+    setSignupResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>,
+    messageApi: ReturnType<typeof message.useMessage>[0]
 ) => {
     const account = (<HTMLInputElement>(
         document.getElementById("in-signup-account")
@@ -117,6 +124,9 @@ export const signup = (
                 });
             }
         })
-        .catch(reason => console.log(reason))
+        .catch(reason => {
+            messageApi.error(reason.message);
+            console.log(reason);
+        })
         .finally(() => setIsSigningUp(false));
 };

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import * as L from "../../logics/login";
 import * as RULES from "../../modules/form-rules";
 import { FormSubmitResult } from "../../modules/types";
 
 export default function SignupForm() {
+    const [messageApi, contextHolder] = message.useMessage();
     const [isSigningUp, setIsSigningUp] = useState(false);
     const [signupResult, setSignupResult] = useState<FormSubmitResult>({
         success: false,
@@ -16,7 +17,10 @@ export default function SignupForm() {
         <Form
             name="normal_login"
             initialValues={{ remember: true }}
-            onFinish={() => L.signup(setIsSigningUp, setSignupResult)}>
+            onFinish={() =>
+                L.signup(setIsSigningUp, setSignupResult, messageApi)
+            }>
+            {contextHolder}
             <Form.Item name="signup_username" rules={RULES.ACCOUNT_RULES}>
                 <Input
                     prefix={<UserOutlined className="site-form-item-icon" />}
