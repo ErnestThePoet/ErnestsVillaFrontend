@@ -5,7 +5,6 @@ import { Tabs } from "antd";
 import styles from "../styles/login.module.scss";
 import LoginForm from "../components/login/login-form";
 import SignupForm from "../components/login/signup-form";
-import LoginHeader from "../components/login/login-header";
 import SiteFooter from "../components/site-footer";
 
 const tabItems = [
@@ -36,7 +35,17 @@ export default function LoginPage() {
                 <title>云安电子商城 - 欢迎登录</title>
             </Head>
 
-            <LoginHeader />
+            <header className={styles.header}>
+                <div>
+                    <img
+                        className="logo"
+                        src="/logo.png"
+                        alt="logo"
+                        onClick={() => router.push("/")}
+                    />
+                    <span className="welcome">欢迎登录</span>
+                </div>
+            </header>
 
             <main className={styles.main}>
                 <div className="bkg-wrapper">
