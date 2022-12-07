@@ -1,8 +1,11 @@
 import { Divider } from "antd";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styles from "./styles/nav-bar.module.scss";
 
 export default function NavBar() {
+    const router = useRouter();
+
     return (
         <header className={styles.header}>
             <span className="href-no-hover">
@@ -14,7 +17,9 @@ export default function NavBar() {
 
             <Divider className="divider" type="vertical" />
 
-            <span className="href">免费注册</span>
+            <Link className="href" href="/login?signup=1">
+                免费注册
+            </Link>
 
             <Divider className="divider" type="vertical" />
 

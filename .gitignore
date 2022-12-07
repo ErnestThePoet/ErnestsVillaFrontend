@@ -19,6 +19,11 @@
 .DS_Store
 *.pem
 
+/styles/*.css
+/styles/*.css.map
+/components/styles/*.css
+/components/styles/*.css.map
+
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -6,6 +6,7 @@ import styles from "../styles/login.module.scss";
 import LoginForm from "../components/login/login-form";
 import SignupForm from "../components/login/signup-form";
 import LoginHeader from "../components/login/login-header";
+import SiteFooter from "../components/site-footer";
 
 const tabItems = [
     {
@@ -14,7 +15,7 @@ const tabItems = [
         children: <LoginForm />
     },
     {
-        label: "免费注册",
+        label: "立即注册",
         key: "1",
         children: <SignupForm />
     }
@@ -50,6 +51,8 @@ export default function LoginPage() {
                     </div>
                 </div>
             </main>
+
+            <SiteFooter />
         </div>
     );
 }

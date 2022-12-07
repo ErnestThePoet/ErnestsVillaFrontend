@@ -1,0 +1,53 @@
+@import "../../styles/common/theme";
+
+@mixin footer-href {
+    color: #666;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+@mixin footer-href-hover {
+    color: $main-color;
+}
+
+.footer {
+    width: 100vw;
+
+    font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+
+    [class~="footer-wrapper"] {
+        margin-top: 30px;
+
+        [class~="links-wrapper"] {
+            width: fit-content;
+            margin: 0 auto;
+
+            [class~="divider"] {
+                margin: 0 20px;
+                border-inline-start: 1.5px solid rgba(5, 5, 5, 0.5) !important;
+            }
+
+            a {
+                @include footer-href;
+
+                &:hover {
+                    @include footer-href-hover;
+                }
+
+                &:visited {
+                    @include footer-href;
+
+                    &:hover {
+                        @include footer-href-hover;
+                    }
+                }
+            }
+        }
+
+        [class~="info-wrapper"] {
+            color: #666;
+            width: fit-content;
+            margin: 10px auto 0;
+        }
+    }
+}
