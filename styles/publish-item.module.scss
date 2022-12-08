@@ -1,0 +1,13 @@
+@import "./common/config";
+@import "./common/theme";
+
+.main{
+    width: 100vw;
+
+    [class~="div-form-wrapper"]{
+        width: 100%;
+        margin: 30px;
+
+        border-radius: 18px;
+    }
+}

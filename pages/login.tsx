@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Tabs } from "antd";
 import * as L from "../logics/login";
+import { tryAutoLogin } from "../logics/common";
 import styles from "../styles/login.module.scss";
 import LoginForm from "../components/login/login-form";
 import SignupForm from "../components/login/signup-form";
@@ -29,11 +30,9 @@ export default function LoginPage() {
     useEffect(() => {
         if (router.query.signup !== undefined) {
             setDafaultActiveKey("1");
+        } else {
+            tryAutoLogin(() => router.push("/"));
         }
-        else {
-            L.tryAutoLogin();
-        }
-        
     }, []);
 
     return (

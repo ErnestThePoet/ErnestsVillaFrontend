@@ -1,9 +1,9 @@
-const WITH_TLS_PROXY: boolean = false;
+import { WITH_TLS_PROXY } from "./url-env";
 
 let urlPrefix = "http://localhost:17570/api/";
 
 if (WITH_TLS_PROXY) {
-    urlPrefix = "http://market.yinkstudio.xyz:17650/api/";
+    urlPrefix = "http://market.yinkstudio.xyz:17750/api/";
 }
 
 const APIS = {
@@ -14,6 +14,7 @@ const APIS = {
     logout: "user/logout",
     changePw: "user/change_pw",
 
+    uploadPreviewImage:"seller/upload_preview_image",
     publishItem:"seller/publish"
 };
 

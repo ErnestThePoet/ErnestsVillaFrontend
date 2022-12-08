@@ -6,19 +6,6 @@ import { message } from "antd";
 import type { FormSubmitResult } from "../modules/types";
 import signupData from "../states/signup-data";
 
-export const tryAutoLogin = () => {
-    const sessionId = localStorage.getItem("sessionId");
-
-    if (sessionId !== null && sessionId.length > 25) {
-        axios.postForm(APIS.autoLogin, { sessionId }).then(res => {
-            if (res.data.success) {
-                userData.setLoginUserData(res.data.account, res.data.accessId);
-                Router.push("/");
-            }
-        });
-    }
-};
-
 export const login = (
     setIsLoggingIn: React.Dispatch<React.SetStateAction<boolean>>,
     setLoginResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>,
