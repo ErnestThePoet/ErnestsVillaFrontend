@@ -2,7 +2,7 @@
 @import "../../styles/common/theme";
 
 @mixin header-href {
-    color: #999;
+    color: #6C6C6C;
     cursor: pointer;
     text-decoration: none;
 }
@@ -13,10 +13,10 @@
 
 .header {
     font-size: 12px;
-    padding: 8px 30px;
+    padding: 12px 30px;
     border-bottom: 1px solid #ddd;
 
-    background-color: #e3e4e5;
+    background-color: #f5f5f5;
 
     display: flex;
     justify-content: flex-end;

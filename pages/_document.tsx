@@ -14,7 +14,7 @@ export default function Document() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <body>
+            <body style={{ overflowX: "hidden" }}>
                 <Main />
                 <NextScript />
             </body>

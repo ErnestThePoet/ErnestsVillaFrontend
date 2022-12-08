@@ -4,12 +4,13 @@ import { Button, Result } from "antd";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import signupData from "../states/signup-data";
-import styles from "../styles/signup-success.module.scss";
+import SuccessPageHeader from "../components/success-page-header";
 
 export default observer(function SignupSuccessPage() {
     const router = useRouter();
 
     const goToLogin = () => {
+        signupData.setIsSignupSuccessful(false);
         router.push("/login");
     };
 
@@ -19,8 +20,6 @@ export default observer(function SignupSuccessPage() {
         if (!signupData.isSignupSuccessful) {
             goToLogin();
         }
-
-        console.log(123);
 
         return () => {
             signupData.stopJumpCounter();
@@ -33,17 +32,7 @@ export default observer(function SignupSuccessPage() {
                 <title>云安电子商城 - 注册成功</title>
             </Head>
 
-            <header className={styles.header}>
-                <div>
-                    <img
-                        className="logo"
-                        src="/logo.png"
-                        alt="logo"
-                        onClick={() => router.push("/")}
-                    />
-                    <span className="welcome">注册成功</span>
-                </div>
-            </header>
+            <SuccessPageHeader headerText="注册成功" />
 
             <Result
                 status="success"

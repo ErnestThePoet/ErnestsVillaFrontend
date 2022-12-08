@@ -31,7 +31,7 @@ export default function LoginPage() {
         if (router.query.signup !== undefined) {
             setDafaultActiveKey("1");
         } else {
-            tryAutoLogin(() => router.push("/"));
+            tryAutoLogin(() => router.push("/"), false);
         }
     }, []);
 

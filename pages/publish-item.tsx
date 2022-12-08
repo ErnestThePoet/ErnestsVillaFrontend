@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
-import { Form, Input, Upload } from "antd";
+import {
+    Form,
+    Input,
+    InputNumber,
+    Upload,
+    Row,
+    Col,
+    Button,
+    message
+} from "antd";
 import NavBar from "../components/nav-bar";
 import SiteBkg from "../components/site-bkg";
 import SiteFooter from "../components/site-footer";
@@ -9,16 +18,34 @@ import { tryAutoLogin } from "../logics/common";
 import styles from "../styles/publish-item.module.scss";
 import APIS from "../modules/apis";
 import type { UploadChangeParam } from "antd/es/upload";
-import type { UploadFile, UploadProps } from "antd/es/upload/interface";
+import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import CDNS from "../modules/cdns";
+import type { FormSubmitResult } from "../modules/types";
 
 export default function PublishItemPage() {
     useEffect(() => {
         tryAutoLogin();
     }, []);
 
+    const [form] = Form.useForm();
+
     const [loading, setLoading] = useState(false);
     const [previewImageUrl, setPreviewImageUrl] = useState("");
+
+    const [previewImageFileName, setPreviewImageFileName] = useState("");
+
+    const [signupResult, setSignupResult] = useState<FormSubmitResult>({
+        success: false,
+        msg: ""
+    });
+
+    const beforeUpload = (file: RcFile) => {
+        const isLt1M = file.size / 1024 / 1024 < 1;
+        if (!isLt1M) {
+            message.error("商品图片不能超过1M");
+        }
+        return isLt1M;
+    };
 
     const onUploadChange: UploadProps["onChange"] = (
         info: UploadChangeParam<UploadFile>
@@ -31,6 +58,20 @@ export default function PublishItemPage() {
             setLoading(false);
             setPreviewImageUrl(
                 CDNS.images + info.file.response.previewImageFileName
+            );
+            setPreviewImageFileName(info.file.response.previewImageFileName);
+        }
+    };
+
+    const onFormValuesChange = (e, _) => {
+        if (e.remaining !== undefined) {
+            form.setFieldValue("remaining", Math.floor(e.remaining));
+        }
+
+        if (e.priceYuan !== undefined) {
+            form.setFieldValue(
+                "priceYuan",
+                parseFloat((e.priceYuan as number).toFixed(2))
             );
         }
     };
@@ -45,32 +86,124 @@ export default function PublishItemPage() {
                 <div className="div-form-wrapper">
                     <Form
                         name="form-publish-item"
+                        form={form}
                         initialValues={{ remember: true }}
-                        onFinish={() => L.publishItem()}>
-                        <Form.Item>
-                            <Upload
-                                accept="image/jpeg,image/png"
-                                action={APIS.uploadPreviewImage}
-                                name="previewImage"
-                                listType="picture-card"
-                                onChange={onUploadChange}
-                                showUploadList={false}>
-                                {previewImageUrl !== "" ? (
-                                    <img
-                                        src={previewImageUrl}
-                                        alt="avatar"
-                                        style={{ width: "100%" }}
+                        onValuesChange={onFormValuesChange}
+                        onFinish={e =>
+                            L.publishItem(
+                                e.name,
+                                e.description,
+                                previewImageFileName,
+                                e.remaining,
+                                e.priceYuan * 100,
+                                setLoading,
+                                setSignupResult
+                            )
+                        }>
+                        <Row gutter={100}>
+                            <Col>
+                                <Form.Item
+                                    name="previewImage"
+                                    label="上传商品图片"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "请上传商品图片"
+                                        }
+                                    ]}>
+                                    <Upload
+                                        accept="image/jpeg,image/png"
+                                        action={APIS.uploadPreviewImage}
+                                        name="previewImage"
+                                        listType="picture-card"
+                                        beforeUpload={beforeUpload}
+                                        onChange={onUploadChange}
+                                        showUploadList={false}>
+                                        {previewImageUrl !== "" ? (
+                                            <img
+                                                src={previewImageUrl}
+                                                alt="preview-image"
+                                                className="img-preview-image"
+                                            />
+                                        ) : (
+                                            <div>
+                                                <PlusOutlined />
+                                                <div className="div-upload-label">
+                                                    上传商品图片
+                                                </div>
+                                            </div>
+                                        )}
+                                    </Upload>
+                                </Form.Item>
+
+                                <Form.Item
+                                    name="name"
+                                    label="商品名称"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "请输入商品名称"
+                                        }
+                                    ]}>
+                                    <Input className="in-name" />
+                                </Form.Item>
+
+                                <Form.Item
+                                    name="description"
+                                    label="商品描述"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "请输入商品描述"
+                                        }
+                                    ]}>
+                                    <Input.TextArea className="in-description" />
+                                </Form.Item>
+                            </Col>
+
+                            <Col>
+                                <Form.Item
+                                    name="remaining"
+                                    label="商品库存量"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "请输入商品库存量"
+                                        }
+                                    ]}>
+                                    <InputNumber size="large" min={1} />
+                                </Form.Item>
+
+                                <Form.Item
+                                    name="priceYuan"
+                                    className="form-item-price"
+                                    label="商品价格（元，精确到分）"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "请输入商品价格"
+                                        }
+                                    ]}>
+                                    <InputNumber
+                                        size="large"
+                                        min={0.01}
+                                        max={100000}
                                     />
-                                ) : (
-                                    <div>
-                                        <PlusOutlined />
-                                        <div style={{ marginTop: 8 }}>
-                                            上传商品图片
-                                        </div>
-                                    </div>
-                                )}
-                            </Upload>
-                        </Form.Item>
+                                </Form.Item>
+
+                                <Form.Item
+                                    validateStatus="error"
+                                    help={signupResult.msg}>
+                                    <Button
+                                        type="primary"
+                                        htmlType="submit"
+                                        block
+                                        loading={loading}>
+                                        发布商品
+                                    </Button>
+                                </Form.Item>
+                            </Col>
+                        </Row>
                     </Form>
                 </div>
             </main>

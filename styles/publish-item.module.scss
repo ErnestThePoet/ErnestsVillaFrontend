@@ -1,13 +1,41 @@
 @import "./common/config";
 @import "./common/theme";
 
-.main{
+.main {
     width: 100vw;
 
-    [class~="div-form-wrapper"]{
+    padding: 50px;
+    padding-bottom: 0;
+
+    [class~="div-form-wrapper"] {
         width: 100%;
-        margin: 30px;
+
+        padding: 40px 100px;
+        padding-bottom: 20px;
+
+        background-color: white;
 
         border-radius: 18px;
+
+        [class~="img-preview-image"] {
+            width: 100%;
+        }
+
+        [class~="div-upload-label"] {
+            margin-top: 8;
+        }
+
+        [class~="in-name"]{
+            width: 550px;
+        }
+
+        [class~="in-description"]{
+            width: 550px;
+            height: 18em;
+        }
+
+        [class~="form-item-price"]{
+            margin: 50px 0;
+        }
     }
 }
