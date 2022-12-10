@@ -8,7 +8,7 @@
 }
 
 @mixin header-href-hover {
-    color: $main-color;
+    color: $theme-red;
 }
 
 .nav {
@@ -27,13 +27,13 @@
         cursor: pointer;
 
         [class~="user"]{
-            color: $main-color;
+            color: $theme-red;
         }
     }
 
     [class~="login"] {
         text-decoration: underline;
-        color: $main-color;
+        color: $theme-red;
     }
 
     [class~="href-no-hover"] {

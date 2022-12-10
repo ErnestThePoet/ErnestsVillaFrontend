@@ -23,6 +23,7 @@ import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import CDNS from "../modules/cdns";
 import type { FormSubmitResult } from "../modules/types";
 import PageHeaderSingleText from "../components/page-header-single-text";
+import { ORANGE } from "../styles/common/theme";
 
 export default function PublishItemPage() {
     useEffect(() => {
@@ -79,7 +80,7 @@ export default function PublishItemPage() {
     };
 
     return (
-        <ConfigProvider theme={{ token: { colorPrimary: "#ff9000" } }}>
+        <ConfigProvider theme={{ token: { colorPrimary: ORANGE } }}>
             <div>
                 <NavBar />
 
