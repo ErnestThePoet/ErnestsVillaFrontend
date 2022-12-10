@@ -23,7 +23,7 @@ const userMenuItems: MenuProps["items"] = [
 
 export default observer(function NavBar() {
     return (
-        <header className={styles.header}>
+        <nav className={styles.nav}>
             {userData.isLoggedIn ? (
                 <Dropdown menu={{ items: userMenuItems }} placement="bottom">
                     <span className="welcome">
@@ -50,11 +50,17 @@ export default observer(function NavBar() {
 
             <Divider className="divider" type="vertical" />
 
+            <Link className="href" href="/publish-item">
+                发布商品
+            </Link>
+
+            <Divider className="divider" type="vertical" />
+
             <span className="href">我的订单</span>
 
             <Divider className="divider" type="vertical" />
 
             <span className="href">购物车</span>
-        </header>
+        </nav>
     );
 });

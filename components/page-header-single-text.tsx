@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import styles from "../styles/components/success-page-header.module.scss";
 
-interface SuccessPageHeaderProps {
+interface PageHeaderSingleTextProps {
     headerText: string;
 }
 
-export default function SuccessPageHeader(props: SuccessPageHeaderProps) {
+export default function PageHeaderSingleText(props: PageHeaderSingleTextProps) {
     const router = useRouter();
 
     return (

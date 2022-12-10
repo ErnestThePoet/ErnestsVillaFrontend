@@ -4,7 +4,7 @@ import { Button, Result } from "antd";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import signupData from "../states/signup-data";
-import SuccessPageHeader from "../components/success-page-header";
+import PageHeaderSingleText from "../components/page-header-single-text";
 
 export default observer(function SignupSuccessPage() {
     const router = useRouter();
@@ -32,7 +32,7 @@ export default observer(function SignupSuccessPage() {
                 <title>云安电子商城 - 注册成功</title>
             </Head>
 
-            <SuccessPageHeader headerText="注册成功" />
+            <PageHeaderSingleText headerText="注册成功" />
 
             <Result
                 status="success"

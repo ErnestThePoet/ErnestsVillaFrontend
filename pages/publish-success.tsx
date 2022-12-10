@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { tryAutoLogin } from "../logics/common";
 import { Result } from "antd";
-import SuccessPageHeader from "../components/success-page-header";
+import PageHeaderSingleText from "../components/page-header-single-text";
 import SiteBkg from "../components/site-bkg";
 
 export default observer(function SignupSuccessPage() {
@@ -19,7 +19,7 @@ export default observer(function SignupSuccessPage() {
 
             <SiteBkg />
 
-            <SuccessPageHeader headerText="商品发布成功" />
+            <PageHeaderSingleText headerText="商品发布成功" />
 
             <Result status="success" title={`恭喜，您的商品发布成功！`} />
         </div>

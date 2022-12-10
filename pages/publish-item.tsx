@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import {
+    ConfigProvider,
     Form,
     Input,
     InputNumber,
@@ -21,6 +22,7 @@ import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import CDNS from "../modules/cdns";
 import type { FormSubmitResult } from "../modules/types";
+import PageHeaderSingleText from "../components/page-header-single-text";
 
 export default function PublishItemPage() {
     useEffect(() => {
@@ -77,138 +79,142 @@ export default function PublishItemPage() {
     };
 
     return (
-        <div>
-            <NavBar />
+        <ConfigProvider theme={{ token: { colorPrimary: "#ff9000" } }}>
+            <div>
+                <NavBar />
 
-            <main className={styles.main}>
-                <SiteBkg />
+                <PageHeaderSingleText headerText="发布商品" />
 
-                <div className="div-form-wrapper">
-                    <Form
-                        name="form-publish-item"
-                        form={form}
-                        initialValues={{ remember: true }}
-                        onValuesChange={onFormValuesChange}
-                        onFinish={e =>
-                            L.publishItem(
-                                e.name,
-                                e.description,
-                                previewImageFileName,
-                                e.remaining,
-                                e.priceYuan * 100,
-                                setLoading,
-                                setSignupResult
-                            )
-                        }>
-                        <Row gutter={100}>
-                            <Col>
-                                <Form.Item
-                                    name="previewImage"
-                                    label="上传商品图片"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "请上传商品图片"
-                                        }
-                                    ]}>
-                                    <Upload
-                                        accept="image/jpeg,image/png"
-                                        action={APIS.uploadPreviewImage}
+                <main className={styles.main}>
+                    <SiteBkg />
+
+                    <div className="div-form-wrapper">
+                        <Form
+                            name="form-publish-item"
+                            form={form}
+                            initialValues={{ remember: true }}
+                            onValuesChange={onFormValuesChange}
+                            onFinish={e =>
+                                L.publishItem(
+                                    e.name,
+                                    e.description,
+                                    previewImageFileName,
+                                    e.remaining,
+                                    e.priceYuan * 100,
+                                    setLoading,
+                                    setSignupResult
+                                )
+                            }>
+                            <Row gutter={100}>
+                                <Col>
+                                    <Form.Item
                                         name="previewImage"
-                                        listType="picture-card"
-                                        beforeUpload={beforeUpload}
-                                        onChange={onUploadChange}
-                                        showUploadList={false}>
-                                        {previewImageUrl !== "" ? (
-                                            <img
-                                                src={previewImageUrl}
-                                                alt="preview-image"
-                                                className="img-preview-image"
-                                            />
-                                        ) : (
-                                            <div>
-                                                <PlusOutlined />
-                                                <div className="div-upload-label">
-                                                    上传商品图片
+                                        label="上传商品图片"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: "请上传商品图片"
+                                            }
+                                        ]}>
+                                        <Upload
+                                            accept="image/jpeg,image/png"
+                                            action={APIS.uploadPreviewImage}
+                                            name="previewImage"
+                                            listType="picture-card"
+                                            beforeUpload={beforeUpload}
+                                            onChange={onUploadChange}
+                                            showUploadList={false}>
+                                            {previewImageUrl !== "" ? (
+                                                <img
+                                                    src={previewImageUrl}
+                                                    alt="preview-image"
+                                                    className="img-preview-image"
+                                                />
+                                            ) : (
+                                                <div>
+                                                    <PlusOutlined />
+                                                    <div className="div-upload-label">
+                                                        上传商品图片
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )}
-                                    </Upload>
-                                </Form.Item>
+                                            )}
+                                        </Upload>
+                                    </Form.Item>
 
-                                <Form.Item
-                                    name="name"
-                                    label="商品名称"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "请输入商品名称"
-                                        }
-                                    ]}>
-                                    <Input className="in-name" />
-                                </Form.Item>
+                                    <Form.Item
+                                        name="name"
+                                        label="商品名称"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: "请输入商品名称"
+                                            }
+                                        ]}>
+                                        <Input className="in-name" />
+                                    </Form.Item>
 
-                                <Form.Item
-                                    name="description"
-                                    label="商品描述"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "请输入商品描述"
-                                        }
-                                    ]}>
-                                    <Input.TextArea className="in-description" />
-                                </Form.Item>
-                            </Col>
+                                    <Form.Item
+                                        name="description"
+                                        label="商品描述"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: "请输入商品描述"
+                                            }
+                                        ]}>
+                                        <Input.TextArea className="in-description" />
+                                    </Form.Item>
+                                </Col>
 
-                            <Col>
-                                <Form.Item
-                                    name="remaining"
-                                    label="商品库存量"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "请输入商品库存量"
-                                        }
-                                    ]}>
-                                    <InputNumber size="large" min={1} />
-                                </Form.Item>
+                                <Col>
+                                    <Form.Item
+                                        name="remaining"
+                                        label="商品库存量"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: "请输入商品库存量"
+                                            }
+                                        ]}>
+                                        <InputNumber size="large" min={1} />
+                                    </Form.Item>
 
-                                <Form.Item
-                                    name="priceYuan"
-                                    className="form-item-price"
-                                    label="商品价格（元，精确到分）"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "请输入商品价格"
-                                        }
-                                    ]}>
-                                    <InputNumber
-                                        size="large"
-                                        min={0.01}
-                                        max={100000}
-                                    />
-                                </Form.Item>
+                                    <Form.Item
+                                        name="priceYuan"
+                                        className="form-item-price"
+                                        label="商品价格（元，精确到分）"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: "请输入商品价格"
+                                            }
+                                        ]}>
+                                        <InputNumber
+                                            size="large"
+                                            min={0.01}
+                                            max={100000}
+                                        />
+                                    </Form.Item>
 
-                                <Form.Item
-                                    validateStatus="error"
-                                    help={signupResult.msg}>
-                                    <Button
-                                        type="primary"
-                                        htmlType="submit"
-                                        block
-                                        loading={loading}>
-                                        发布商品
-                                    </Button>
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                    </Form>
-                </div>
-            </main>
+                                    <Form.Item
+                                        validateStatus="error"
+                                        help={signupResult.msg}>
+                                        <Button
+                                            type="primary"
+                                            htmlType="submit"
+                                            block
+                                            loading={loading}>
+                                            发布商品
+                                        </Button>
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                        </Form>
+                    </div>
+                </main>
 
-            <SiteFooter />
-        </div>
+                <SiteFooter />
+            </div>
+        </ConfigProvider>
     );
 }
