@@ -13,12 +13,6 @@ class ItemShowData{
         makeAutoObservable(this);
     }
 
-    isLoading: boolean = true;
-    
-    setIsLoading(value:boolean) {
-        this.isLoading = value;
-    }
-
     showedItems: SingleShowedItem[] = [];
 
     setShowedItems(value: SingleShowedItem[]) {

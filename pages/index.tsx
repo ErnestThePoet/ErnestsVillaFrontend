@@ -11,7 +11,6 @@ import { tryAutoLogin } from "../logics/common";
 import * as L from "../logics/index";
 import styles from "../styles/index.module.scss";
 import searchData from "../states/search-data";
-import SingleLoadingItem from "../components/single-loading-item";
 import itemShowData from "../states/item-show-data";
 import SingleShowedItem from "../components/single-showed-item";
 
@@ -24,7 +23,7 @@ export default observer(function HomePage() {
     }, []);
 
     return (
-        <div>
+        <div className="overflow-x-hidden">
             <Head>
                 <title>云安电子商城</title>
             </Head>
