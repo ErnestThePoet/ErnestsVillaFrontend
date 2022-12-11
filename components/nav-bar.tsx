@@ -57,10 +57,6 @@ export default observer(function NavBar() {
             <Divider className="divider" type="vertical" />
 
             <span className="href">我的订单</span>
-
-            <Divider className="divider" type="vertical" />
-
-            <span className="href">购物车</span>
         </nav>
     );
 });

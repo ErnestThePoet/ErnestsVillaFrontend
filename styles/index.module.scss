@@ -1,11 +1,25 @@
 @import "./common/config";
 @import "./common/theme";
 
+.main{
+    padding: 50px 140px;
+}
 
+.divContentWrapper{
+    width: 100%;
 
-// .divLogo{
-//   img{
-//     height: calc( $navbar-height * 0.7);
-//     width: calc( $navbar-height * 0.7 * 218 / 186);
-//   }
-// }
+    padding: 40px 60px;
+
+    background-color: white;
+
+    border-radius: 18px;
+
+    box-shadow: 0 6px 20px 0 rgb(37 43 50 / 10%);
+}
+
+.divSearchRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}

@@ -1,21 +1,6 @@
 @import "./common/config";
 @import "./common/theme";
 
-.header {
-    padding: 20px 100px;
-
-    img[class="logo"] {
-        height: 70px;
-        margin-right: 50px;
-        cursor: pointer;
-    }
-
-    [class~="welcome"] {
-        font-size: 30px;
-        color: #555;
-    }
-}
-
 .main {
     width: 100vw;
     background-color: #e93854;

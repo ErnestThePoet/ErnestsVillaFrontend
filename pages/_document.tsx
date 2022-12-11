@@ -14,7 +14,11 @@ export default function Document() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <body style={{ overflowX: "hidden" }}>
+            <body
+                style={{
+                    overflowX: "hidden",
+                    font: "12px/1.5 tahoma, arial, 'Hiragino Sans GB', '\\5b8b\\4f53', sans-serif"
+                }}>
                 <Main />
                 <NextScript />
             </body>

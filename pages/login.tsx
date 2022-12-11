@@ -8,6 +8,7 @@ import styles from "../styles/login.module.scss";
 import LoginForm from "../components/login/login-form";
 import SignupForm from "../components/login/signup-form";
 import SiteFooter from "../components/site-footer";
+import PageHeaderSingleText from "../components/page-header-single-text";
 
 const tabItems = [
     {
@@ -41,17 +42,7 @@ export default function LoginPage() {
                 <title>云安电子商城 - 欢迎登录</title>
             </Head>
 
-            <header className={styles.header}>
-                <div>
-                    <img
-                        className="logo"
-                        src="/logo.png"
-                        alt="logo"
-                        onClick={() => router.push("/")}
-                    />
-                    <span className="welcome">欢迎登录</span>
-                </div>
-            </header>
+            <PageHeaderSingleText headerText="欢迎登录" />
 
             <main className={styles.main}>
                 <div className="bkg-wrapper">

@@ -1,14 +1,14 @@
 .header {
+    font-family: sans-serif;
+    
     padding: 20px 100px;
-
-    img[class="logo"] {
-        height: 70px;
-        margin-right: 50px;
-        cursor: pointer;
-    }
 
     [class~="welcome"] {
         font-size: 30px;
         color: #555;
     }
+}
+
+.logo{
+    margin-right: 50px;
 }
