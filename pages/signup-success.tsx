@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import signupData from "../states/signup-data";
 import PageHeaderSingleText from "../components/page-header-single-text";
+import SiteBkg from "../components/site-bkg";
 
 export default observer(function SignupSuccessPage() {
     const router = useRouter();
@@ -31,6 +32,8 @@ export default observer(function SignupSuccessPage() {
             <Head>
                 <title>云安电子商城 - 注册成功</title>
             </Head>
+
+            <SiteBkg />
 
             <PageHeaderSingleText headerText="注册成功" />
 

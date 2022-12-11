@@ -19,7 +19,7 @@ export const tryAutoLogin = (
 
     if (sessionId !== null && sessionId.length > 25) {
         axios
-            .postForm(APIS.autoLogin, { sessionId })
+            .putForm(APIS.autoLogin, { sessionId })
             .then(res => {
                 if (res.data.success) {
                     userData.setLoginUserData(

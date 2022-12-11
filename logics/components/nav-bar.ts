@@ -9,7 +9,7 @@ export const logout = () => {
     const sessionId = localStorage.getItem("sessionId");
 
     if (sessionId !== null && sessionId.length > 25) {
-        axios.postForm(APIS.logout, { sessionId });
+        axios.putForm(APIS.logout, { sessionId });
     }
 
     localStorage.removeItem("sessionId");
@@ -32,7 +32,7 @@ export const changePw = () => {
     changePwDialogState.setIsConfirmLoading(true);
 
     axios
-        .postForm(APIS.changePw, {
+        .putForm(APIS.changePw, {
             account: userData.account,
             password: changePwDialogState.oldPw,
             newPassword: changePwDialogState.newPw

@@ -24,7 +24,7 @@ export const login = (
     setIsLoggingIn(true);
 
     axios
-        .postForm(APIS.login, {
+        .putForm(APIS.login, {
             account,
             password,
             remember

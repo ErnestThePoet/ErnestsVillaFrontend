@@ -38,6 +38,7 @@ export default function HomePage() {
                             allowClear
                             enterButton="搜索"
                             size="large"
+                            value={searchData.searchKeyWord}
                             onChange={e =>
                                 searchData.setSearchKeyWord(e.target.value)
                             }
