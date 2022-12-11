@@ -3,9 +3,29 @@ import Router from "next/router";
 import APIS from "../modules/apis";
 import userData from "../states/user-data";
 import { message } from "antd";
-import type { FormSubmitResult } from "../modules/types";
-import signupData from "../states/signup-data";
+import itemShowData from "../states/item-show-data";
 
-export function submitSearch() {
-    
+export function fetchRecommendedItems() {
+    itemShowData.setIsLoading(true);
+
+    axios
+        .get(APIS.getItemRecommendations, {
+            params: {
+                count: 16
+            }
+        })
+        .then(res => {
+            if (res.data.success) {
+                itemShowData.setShowedItems(res.data.recommendations);
+                itemShowData.setIsLoading(false);
+            } else {
+                message.error(res.data.msg);
+            }
+        })
+        .catch(reason => {
+            console.log(reason);
+            message.error(reason.message);
+        });
 }
+
+export function submitSearch() {}

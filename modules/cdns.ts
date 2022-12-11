@@ -15,3 +15,7 @@ for (let i in CDNS) {
 }
 
 export default CDNS;
+
+export function getCdnUrl(cdnPath: string, fileName: string): string{
+    return cdnPath + fileName;
+}

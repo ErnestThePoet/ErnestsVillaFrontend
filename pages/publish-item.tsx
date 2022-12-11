@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import {
@@ -20,7 +21,7 @@ import styles from "../styles/publish-item.module.scss";
 import APIS from "../modules/apis";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-import CDNS from "../modules/cdns";
+import CDNS, { getCdnUrl } from "../modules/cdns";
 import type { FormSubmitResult } from "../modules/types";
 import PageHeaderSingleText from "../components/page-header-single-text";
 import { ORANGE } from "../styles/common/theme";
@@ -60,7 +61,7 @@ export default function PublishItemPage() {
         if (info.file.status === "done") {
             setLoading(false);
             setPreviewImageUrl(
-                CDNS.images + info.file.response.previewImageFileName
+                getCdnUrl(CDNS.images, info.file.response.previewImageFileName)
             );
             setPreviewImageFileName(info.file.response.previewImageFileName);
         }
@@ -70,18 +71,15 @@ export default function PublishItemPage() {
         if (e.remaining !== undefined) {
             form.setFieldValue("remaining", Math.floor(e.remaining));
         }
-
-        if (e.priceYuan !== undefined) {
-            form.setFieldValue(
-                "priceYuan",
-                parseFloat((e.priceYuan as number).toFixed(2))
-            );
-        }
     };
 
     return (
         <ConfigProvider theme={{ token: { colorPrimary: ORANGE } }}>
             <div>
+                <Head>
+                    <title>云安电子商城 - 发布商品</title>
+                </Head>
+
                 <NavBar />
 
                 <PageHeaderSingleText headerText="发布商品" />
@@ -101,7 +99,7 @@ export default function PublishItemPage() {
                                     e.description,
                                     previewImageFileName,
                                     e.remaining,
-                                    e.priceYuan * 100,
+                                    e.priceYuan,
                                     setLoading,
                                     setSignupResult
                                 )
@@ -118,7 +116,7 @@ export default function PublishItemPage() {
                                             }
                                         ]}>
                                         <Upload
-                                            accept="image/jpeg,image/png"
+                                            accept="image/jpeg,image/png,image/webp"
                                             action={APIS.uploadPreviewImage}
                                             name="previewImage"
                                             listType="picture-card"
@@ -190,10 +188,12 @@ export default function PublishItemPage() {
                                                 message: "请输入商品价格"
                                             }
                                         ]}>
-                                        <InputNumber
+                                        <InputNumber<string>
                                             size="large"
-                                            min={0.01}
-                                            max={100000}
+                                            min="0.01"
+                                            max="100000"
+                                            precision={2}
+                                            stringMode
                                         />
                                     </Form.Item>
 

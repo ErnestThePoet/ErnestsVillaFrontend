@@ -2,13 +2,13 @@
 @import "./common/theme";
 
 .main{
-    padding: 50px 140px;
+    padding: 50px 130px;
 }
 
 .divContentWrapper{
     width: 100%;
 
-    padding: 40px 60px;
+    padding: 40px 30px;
 
     background-color: white;
 
@@ -18,8 +18,56 @@
 }
 
 .divSearchRow{
+    padding: 0 80px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 70px;
+}
+
+.divItemShowWrapper{
+    position: relative;
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    [class~=refresh]{
+        position: absolute;
+        top: 0;
+        right: -90px;
+
+        background-color: rgba(255,255,255,0.8);
+        
+        line-height: 12px;
+
+        width: 40px;
+        padding: 9px;
+        
+        border: 1px solid #E3E5E7;
+        border-radius: 8px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+        user-select: none;
+        
+        transition-duration: 200ms;
+
+        &:hover{
+            background-color: #f2f2f2;
+        }
+
+        &:active{
+            transform: scale(0.95) translateZ(0);
+        }
+
+        [class~=text]{
+            width: 1em;
+            margin-top: 6px;
+        }
+    }
 }

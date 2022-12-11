@@ -3,6 +3,10 @@ import Router from "next/router";
 import APIS from "../modules/apis";
 import userData from "../states/user-data";
 
+export const fetchCartData = () => {
+    
+}
+
 export const tryAutoLogin = (
     onLogin?: () => void,
     gotoLoginOnFail: boolean = true

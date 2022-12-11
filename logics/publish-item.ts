@@ -10,7 +10,7 @@ export function publishItem(
     description: string,
     previewImageFileName: string,
     remaining: number,
-    priceCents: number,
+    priceYuan: string,
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
     setLoginResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
 ) {
@@ -32,7 +32,7 @@ export function publishItem(
             description,
             previewImageFileName,
             remaining,
-            priceCents
+            priceYuan
         })
         .then(res => {
             if (res.data.success) {

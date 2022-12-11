@@ -14,8 +14,10 @@ const APIS = {
     logout: "user/logout",
     changePw: "user/change_pw",
 
-    uploadPreviewImage:"seller/upload_preview_image",
-    publishItem:"seller/publish"
+    uploadPreviewImage: "seller/upload_preview_image",
+    publishItem: "seller/publish",
+
+    getItemRecommendations: "customer/get_recommendations"
 };
 
 for (let i in APIS) {
