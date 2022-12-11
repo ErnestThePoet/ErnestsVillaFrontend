@@ -6,8 +6,6 @@ import { message } from "antd";
 import itemShowData from "../states/item-show-data";
 
 export function fetchRecommendedItems() {
-    itemShowData.setIsLoading(true);
-
     axios
         .get(APIS.getItemRecommendations, {
             params: {
@@ -17,7 +15,6 @@ export function fetchRecommendedItems() {
         .then(res => {
             if (res.data.success) {
                 itemShowData.setShowedItems(res.data.recommendations);
-                itemShowData.setIsLoading(false);
             } else {
                 message.error(res.data.msg);
             }
