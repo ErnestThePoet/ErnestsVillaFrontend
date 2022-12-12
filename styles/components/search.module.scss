@@ -2,7 +2,7 @@
 @import "../common/theme";
 
 .main{
-    padding: 50px 130px;
+    padding: 50px 130px 20px;
 }
 
 .divContentWrapper{
@@ -23,4 +23,8 @@
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+}
+
+.divEmptyWrapper{
+    margin: 110px 0;
 }

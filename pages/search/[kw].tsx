@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Empty } from "antd";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import NavBar from "../../components/nav-bar";
@@ -28,7 +29,7 @@ export default observer(function SearchResultPage() {
     return (
         <div className="overflow-x-hidden">
             <Head>
-                <title>云安电子商城</title>
+                <title>{router.query.kw ?? ""}的搜索结果 - 云安电子商城</title>
             </Head>
 
             <NavBar />
@@ -39,11 +40,17 @@ export default observer(function SearchResultPage() {
                 <div className={styles.divContentWrapper}>
                     <SearchRow />
 
-                    <div className={styles.divItemShowWrapper}>
-                        {searchResultData.results.map((x, i) => (
-                            <SingleSearchResult key={i} item={x} />
-                        ))}
-                    </div>
+                    {searchResultData.results.length === 0 ? (
+                        <div className={styles.divEmptyWrapper}>
+                            <Empty description="未搜索到任何商品" />
+                        </div>
+                    ) : (
+                        <div className={styles.divItemShowWrapper}>
+                            {searchResultData.results.map((x, i) => (
+                                <SingleSearchResult key={i} item={x} />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </main>
 

@@ -2,7 +2,7 @@
 @import "./common/theme";
 
 .main{
-    padding: 50px 130px;
+    padding: 50px 130px 20px;
 }
 
 .divContentWrapper{
@@ -62,4 +62,8 @@
             margin-top: 6px;
         }
     }
+}
+
+.divEmptyWrapper{
+    margin: 110px 0;
 }

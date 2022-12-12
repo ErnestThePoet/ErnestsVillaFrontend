@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Empty } from "antd";
 import { observer } from "mobx-react-lite";
 import { SyncOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
@@ -32,19 +33,28 @@ export default observer(function HomePage() {
                 <div className={styles.divContentWrapper}>
                     <SearchRow />
 
-                    <div className={styles.divItemShowWrapper}>
-                        <div
-                            className="refresh"
-                            onClick={() => L.fetchRecommendedItems()}>
-                            <SyncOutlined />
-                            <div className="text">换一换</div>
+                    {itemRecommendationData.recommendations.length === 0 ? (
+                        <div className={styles.divEmptyWrapper}>
+                            <Empty description="未搜索到任何商品" />
                         </div>
-                        {itemRecommendationData.recommendations
-                            .slice(0, 16)
-                            .map((x, i) => (
-                                <SingleItemRecommendation key={i} item={x} />
-                            ))}
-                    </div>
+                    ) : (
+                        <div className={styles.divItemShowWrapper}>
+                            <div
+                                className="refresh"
+                                onClick={() => L.fetchRecommendedItems()}>
+                                <SyncOutlined />
+                                <div className="text">换一换</div>
+                            </div>
+                            {itemRecommendationData.recommendations
+                                .slice(0, 16)
+                                .map((x, i) => (
+                                    <SingleItemRecommendation
+                                        key={i}
+                                        item={x}
+                                    />
+                                ))}
+                        </div>
+                    )}
                 </div>
             </main>
 
