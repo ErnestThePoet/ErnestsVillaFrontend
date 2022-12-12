@@ -17,7 +17,8 @@ const APIS = {
     uploadPreviewImage: "seller/upload_preview_image",
     publishItem: "seller/publish",
 
-    getItemRecommendations: "customer/get_recommendations"
+    getItemRecommendations: "customer/get_recommendations",
+    search: "customer/search"
 };
 
 for (let i in APIS) {

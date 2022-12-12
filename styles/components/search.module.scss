@@ -1,0 +1,26 @@
+@import "../common/config";
+@import "../common/theme";
+
+.main{
+    padding: 50px 130px;
+}
+
+.divContentWrapper{
+    width: 100%;
+
+    padding: 40px 30px;
+
+    background-color: white;
+
+    border-radius: 18px;
+
+    box-shadow: 0 6px 20px 0 rgb(37 43 50 / 10%);
+}
+
+.divItemShowWrapper{
+    position: relative;
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}

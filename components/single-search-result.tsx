@@ -1,15 +1,15 @@
 import { observer } from "mobx-react-lite";
-import type { SingleShowedItem } from "../states/item-show-data";
+import type { SingleItemPreview } from "../modules/types";
 import CDNS, { getCdnUrl } from "../modules/cdns";
-import styles from "../styles/components/single-showed-item.module.scss";
+import styles from "../styles/components/single-search-result.module.scss";
 import Decimal from "decimal.js";
 
-interface SingleShowedItemProps {
-    item: SingleShowedItem;
+interface SingleSearchResultProps {
+    item: SingleItemPreview;
 }
 
-export default observer(function SingleShowedItem(
-    props: SingleShowedItemProps
+export default observer(function SingleSearchResult(
+    props: SingleSearchResultProps
 ) {
     return (
         <div className={styles.divWrapper}>
@@ -20,7 +20,6 @@ export default observer(function SingleShowedItem(
             />
 
             <div className={styles.divDetail}>
-                <div className="name">{props.item.name}</div>
                 <div className="price-purchase">
                     <div className="price">
                         <em>￥</em>
@@ -31,6 +30,7 @@ export default observer(function SingleShowedItem(
                         {props.item.purchaseCount}人付款
                     </div>
                 </div>
+                <div className="name">{props.item.name}</div>
             </div>
         </div>
     );

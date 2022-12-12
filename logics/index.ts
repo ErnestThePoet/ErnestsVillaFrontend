@@ -3,7 +3,7 @@ import Router from "next/router";
 import APIS from "../modules/apis";
 import userData from "../states/user-data";
 import { message } from "antd";
-import itemShowData from "../states/item-show-data";
+import itemRecommendationData from "../states/item-recommendation-data";
 
 export function fetchRecommendedItems() {
     axios
@@ -14,7 +14,7 @@ export function fetchRecommendedItems() {
         })
         .then(res => {
             if (res.data.success) {
-                itemShowData.setShowedItems(res.data.recommendations);
+                itemRecommendationData.setRecommendations(res.data.recommendations);
             } else {
                 message.error(res.data.msg);
             }
@@ -24,5 +24,3 @@ export function fetchRecommendedItems() {
             message.error(reason.message);
         });
 }
-
-export function submitSearch() {}

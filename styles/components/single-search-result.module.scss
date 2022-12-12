@@ -1,37 +1,41 @@
 .divWrapper {
     display: flex;
-    background-color: #f7f9fa;
+    flex-direction: column;
+    background-color: white;
 
-    width: 380px;
-    padding: 11px;
-    border: 1px solid transparent;
-    border-radius: 12px;
+    width: 220px;
+    height: 330px;
+    box-sizing: content-box;
+    border: 1px solid #ededed;
     cursor: pointer;
 
-    transition-duration: 500ms;
+    transition-duration: 200ms;
 
     &:hover{
         border-color: #ff915e;
     }
 
     [class~="preview"] {
-        width: 150px;
-        height: 150px;
-        border-radius: 10px;
-        margin-right: 12px;
+        width: 220px;
+        height: 220px;
+        margin-bottom: 12px;
     }
 }
 
 .divDetail {
+    padding: 10px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex-grow: 1;
 
     [class~=name]{
-        font-size: 16px;
+        font-size: 12px;
         
         &:hover{
             color: #ff5000;
+            text-decoration: underline;
         }
     }
 

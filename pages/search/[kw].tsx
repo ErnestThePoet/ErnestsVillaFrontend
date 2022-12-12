@@ -1,32 +1,27 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-import { Button, Badge, Input } from "antd";
-import { ShoppingCartOutlined, SyncOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
-import Logo from "../../components/logo";
 import NavBar from "../../components/nav-bar";
 import SiteBkg from "../../components/site-bkg";
 import SiteFooter from "../../components/site-footer";
 import { tryAutoLogin } from "../../logics/common";
-import * as L from "../../logics/index";
-import styles from "../../styles/index.module.scss";
-import searchData from "../../states/search-data";
-import itemShowData from "../../states/item-show-data";
-import SingleShowedItem from "../../components/single-showed-item";
-
-const { Search } = Input;
+import * as L from "../../logics/search";
+import styles from "../../styles/components/search.module.scss";
+import SearchRow from "../../components/search-row";
+import { useRouter } from "next/router";
+import searchResultData from "../../states/search-result-data";
+import SingleSearchResult from "../../components/single-search-result";
 
 export default observer(function SearchResultPage() {
     const router = useRouter();
 
     useEffect(() => {
-        tryAutoLogin();
+        tryAutoLogin(undefined, false);
     }, []);
 
     useEffect(() => {
         if (router.isReady) {
-            console.log(router.query)
+            L.submitSearch(router.query.kw as string);
         }
     }, [router.query]);
 
@@ -42,39 +37,11 @@ export default observer(function SearchResultPage() {
                 <SiteBkg />
 
                 <div className={styles.divContentWrapper}>
-                    <div className={styles.divSearchRow}>
-                        <Logo size={60} />
-
-                        <Search
-                            placeholder="输入要搜索的宝贝名称"
-                            allowClear
-                            enterButton="搜索"
-                            size="large"
-                            value={searchData.searchKeyWord}
-                            onChange={e =>
-                                searchData.setSearchKeyWord(e.target.value)
-                            }
-                            onSearch={() => L.submitSearch()}
-                        />
-
-                        <Badge count={16}>
-                            <Button
-                                icon={<ShoppingCartOutlined />}
-                                size="large">
-                                我的购物车
-                            </Button>
-                        </Badge>
-                    </div>
+                    <SearchRow />
 
                     <div className={styles.divItemShowWrapper}>
-                        <div
-                            className="refresh"
-                            onClick={() => L.fetchRecommendedItems()}>
-                            <SyncOutlined />
-                            <div className="text">换一换</div>
-                        </div>
-                        {itemShowData.showedItems.slice(0, 16).map((x, i) => (
-                            <SingleShowedItem key={i} item={x} />
+                        {searchResultData.results.map((x, i) => (
+                            <SingleSearchResult key={i} item={x} />
                         ))}
                     </div>
                 </div>
