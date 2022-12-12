@@ -16,7 +16,10 @@ import SearchRow from "../components/search-row";
 export default observer(function HomePage() {
     useEffect(() => {
         tryAutoLogin(undefined, false);
-        L.fetchRecommendedItems();
+
+        if (itemRecommendationData.recommendations.length === 0) {
+            L.fetchRecommendedItems();
+        }
     }, []);
 
     return (

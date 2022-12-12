@@ -3,6 +3,8 @@ import type { SingleItemPreview } from "../modules/types";
 import CDNS, { getCdnUrl } from "../modules/cdns";
 import styles from "../styles/components/single-showed-item.module.scss";
 import Decimal from "decimal.js";
+import { useRouter } from "next/router";
+import userData from "../states/user-data";
 
 interface SingleItemRecommendationProps {
     item: SingleItemPreview;
@@ -11,8 +13,18 @@ interface SingleItemRecommendationProps {
 export default observer(function SingleItemRecommendation(
     props: SingleItemRecommendationProps
 ) {
+    const router = useRouter();
+
     return (
-        <div className={styles.divWrapper}>
+        <div
+            className={styles.divWrapper}
+            onClick={() => {
+                if (userData.isLoggedIn) {
+                    router.push(`/item/${props.item.itemId}`);
+                } else {
+                    router.push("/login");
+                }
+            }}>
             <img
                 className="preview"
                 src={getCdnUrl(CDNS.images, props.item.previewImageFileName)}

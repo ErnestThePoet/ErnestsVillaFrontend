@@ -6,6 +6,7 @@ import styles from "../styles/components/search-row.module.scss";
 import searchData from "../states/search-data";
 import { useRouter } from "next/router";
 import shoppingCartData from "../states/shopping-cart-data";
+import userData from "../states/user-data";
 
 const { Search } = Input;
 
@@ -25,7 +26,11 @@ export default observer(function SearchRow() {
                 onChange={e => searchData.setSearchKeyWord(e.target.value)}
                 onSearch={e => {
                     if (e !== "") {
-                        router.push("/search/" + e);
+                        if (userData.isLoggedIn) {
+                            router.push("/search/" + e);
+                        } else {
+                            router.push("/login");
+                        }
                     }
                 }}
             />

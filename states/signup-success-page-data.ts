@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-class SignupData {
+class SignupSuccessPageData {
     constructor() {
         makeAutoObservable(this);
     }
@@ -45,4 +45,4 @@ class SignupData {
     }
 }
 
-export default new SignupData();
+export default new SignupSuccessPageData();

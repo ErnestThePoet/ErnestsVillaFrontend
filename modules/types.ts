@@ -10,3 +10,14 @@ export interface SingleItemPreview {
     priceCents: number;
     purchaseCount: number;
 }
+
+export interface SingleItemDetail {
+    itemId: number;
+    sellerAccount: string;
+    name: string;
+    description: string;
+    previewImageFileName: string;
+    remaining: number;
+    priceCents: number;
+    purchaseCount: number;
+}

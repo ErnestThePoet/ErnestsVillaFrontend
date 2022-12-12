@@ -4,7 +4,7 @@ import APIS from "../modules/apis";
 import userData from "../states/user-data";
 import { message } from "antd";
 import type { FormSubmitResult } from "../modules/types";
-import signupData from "../states/signup-data";
+import signupSuccessPageData from "../states/signup-success-page-data";
 
 export const login = (
     setIsLoggingIn: React.Dispatch<React.SetStateAction<boolean>>,
@@ -99,8 +99,8 @@ export const signup = (
                 // this branch may not execute finally
                 setIsSigningUp(false);
 
-                signupData.setIsSignupSuccessful(true);
-                signupData.setSignupAccount(account);
+                signupSuccessPageData.setIsSignupSuccessful(true);
+                signupSuccessPageData.setSignupAccount(account);
 
                 Router.push("/signup-success");
             } else {

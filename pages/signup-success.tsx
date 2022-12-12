@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Button, Result } from "antd";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import signupData from "../states/signup-data";
+import signupSuccessPageData from "../states/signup-success-page-data";
 import PageHeaderSingleText from "../components/page-header-single-text";
 import SiteBkg from "../components/site-bkg";
 
@@ -11,19 +11,19 @@ export default observer(function SignupSuccessPage() {
     const router = useRouter();
 
     const goToLogin = () => {
-        signupData.setIsSignupSuccessful(false);
+        signupSuccessPageData.setIsSignupSuccessful(false);
         router.push("/login");
     };
 
     useEffect(() => {
-        signupData.startJumpCounter(goToLogin);
+        signupSuccessPageData.startJumpCounter(goToLogin);
 
-        if (!signupData.isSignupSuccessful) {
+        if (!signupSuccessPageData.isSignupSuccessful) {
             goToLogin();
         }
 
         return () => {
-            signupData.stopJumpCounter();
+            signupSuccessPageData.stopJumpCounter();
         };
     }, []);
 
@@ -39,8 +39,8 @@ export default observer(function SignupSuccessPage() {
 
             <Result
                 status="success"
-                title={`${signupData.signupAccount}，恭喜您成功注册云安电子商城账号！`}
-                subTitle={`${signupData.jumpCounter}秒后自动回到登录页面。`}
+                title={`${signupSuccessPageData.signupAccount}，恭喜您成功注册云安电子商城账号！`}
+                subTitle={`${signupSuccessPageData.jumpCounter}秒后自动回到登录页面。`}
                 extra={<Button onClick={() => goToLogin()}>立即跳转</Button>}
             />
         </div>

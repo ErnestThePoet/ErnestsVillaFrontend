@@ -18,7 +18,8 @@ const APIS = {
     publishItem: "seller/publish",
 
     getItemRecommendations: "customer/get_recommendations",
-    search: "customer/search"
+    search: "customer/search",
+    getItemDetail: "customer/get_item_detail"
 };
 
 for (let i in APIS) {
