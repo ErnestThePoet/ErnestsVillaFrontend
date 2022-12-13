@@ -1,5 +1,5 @@
-import { ConfigProvider, InputNumber, Empty } from "antd";
-import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
+import { ConfigProvider, InputNumber, Divider, Empty } from "antd";
+import { PlusOutlined, MinusOutlined, ShopTwoTone } from "@ant-design/icons";
 import Decimal from "decimal.js";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -99,6 +99,7 @@ export default function ItemPage() {
                                     <div className="name">{detail.name}</div>
 
                                     <div className="seller">
+                                        <ShopTwoTone className="seller-icon"/>
                                         {detail.sellerAccount}
                                     </div>
 
@@ -176,7 +177,17 @@ export default function ItemPage() {
                                     )}
                                 </div>
                             </div>
-                            <div className={styles.divLower}></div>
+                                <div className={styles.divLower}>
+                                    <div className="description-title">
+                                        商品详情
+                                    </div>
+
+                                    <Divider />
+                                    
+                                    <div className="description">
+                                        {detail.description}
+                                    </div>
+                            </div>
                         </div>
                     )}
                 </main>
