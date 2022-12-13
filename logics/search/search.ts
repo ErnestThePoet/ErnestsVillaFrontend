@@ -1,8 +1,8 @@
 import axios from "axios";
-import APIS from "../modules/apis";
-import userData from "../states/user-data";
+import APIS from "../../modules/apis";
+import userData from "../../states/user-data";
 import { message } from "antd";
-import type { SingleItemPreview } from "../modules/types";
+import type { SingleItemPreview } from "../../modules/types";
 
 export function submitSearch(
     keyword: string,

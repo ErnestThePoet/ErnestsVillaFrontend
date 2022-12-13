@@ -1,12 +1,12 @@
 import axios from "axios";
-import APIS from "../modules/apis";
+import APIS from "../../modules/apis";
 import { message } from "antd";
-import userData from "../states/user-data";
-import type { SingleItemDetail } from "../modules/types";
+import userData from "../../states/user-data";
+import type { SingleItemDetail } from "../../modules/types";
 
 export function getItemDetail(
     itemId: number,
-    setResults: React.Dispatch<
+    setDetail: React.Dispatch<
         React.SetStateAction<SingleItemDetail | undefined>
     >
 ) {
@@ -19,7 +19,7 @@ export function getItemDetail(
         })
         .then(res => {
             if (res.data.success) {
-                setResults(res.data.itemDetail);
+                setDetail(res.data.itemDetail);
             }
         })
         .catch(reason => {

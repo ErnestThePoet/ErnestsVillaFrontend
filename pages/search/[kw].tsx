@@ -5,8 +5,8 @@ import NavBar from "../../components/nav-bar";
 import SiteBkg from "../../components/site-bkg";
 import SiteFooter from "../../components/site-footer";
 import { tryAutoLogin } from "../../logics/common";
-import * as L from "../../logics/search";
-import styles from "../../styles/search.module.scss";
+import * as L from "../../logics/search/search";
+import styles from "../../styles/search/search.module.scss";
 import SearchRow from "../../components/search-row";
 import { useRouter } from "next/router";
 import SingleSearchResult from "../../components/single-search-result";
@@ -19,17 +19,15 @@ export default function SearchResultPage() {
     const [results, setResults] = useState<SingleItemPreview[]>([]);
 
     const submitSearch = () => {
-        if (router.isReady && userData.isLoggedIn) {
+        if (userData.isLoggedIn) {
             L.submitSearch(router.query.kw as string, setResults);
         }
     };
 
     useEffect(() => {
-        tryAutoLogin(submitSearch);
-    }, []);
-
-    useEffect(() => {
-        submitSearch();
+        if (router.isReady) {
+            tryAutoLogin(submitSearch);
+        }
     }, [router.query]);
 
     return (

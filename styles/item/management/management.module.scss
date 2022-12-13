@@ -1,0 +1,50 @@
+@import "../../common/config";
+@import "../../common/theme";
+
+.main {
+    width: 100vw;
+
+    padding: 10px 50px;
+
+    [class~="div-form-wrapper"] {
+        width: 100%;
+
+        padding: 40px 100px;
+        padding-bottom: 20px;
+
+        background-color: white;
+
+        border-radius: 18px;
+
+        box-shadow: 0 6px 20px 0 rgb(37 43 50 / 10%);
+
+        [class~="img-preview-image"] {
+            width: 100%;
+        }
+
+        [class~="div-upload-label"] {
+            margin-top: 8;
+        }
+
+        [class~="in-name"] {
+            width: 550px;
+        }
+
+        [class~="in-description"] {
+            width: 550px;
+            height: 12em;
+        }
+
+        [class~="form-item-price"] {
+            margin: 50px 0;
+        }
+
+        button[type="submit"] {
+            background-color: #f05355;
+        }
+
+        [class~="empty-wrapper"] {
+            margin: 120px 0;
+        }
+    }
+}

@@ -1,6 +1,5 @@
 import { ConfigProvider, InputNumber, Divider, Empty } from "antd";
 import { PlusOutlined, MinusOutlined, ShopTwoTone } from "@ant-design/icons";
-import Decimal from "decimal.js";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -9,12 +8,12 @@ import SearchRow from "../../components/search-row";
 import SiteBkg from "../../components/site-bkg";
 import SiteFooter from "../../components/site-footer";
 import { tryAutoLogin } from "../../logics/common";
-import * as L from "../../logics/item";
+import * as L from "../../logics/item/item";
 import CDNS, { getCdnUrl } from "../../modules/cdns";
 import type { SingleItemDetail } from "../../modules/types";
 import userData from "../../states/user-data";
 import { ORANGE } from "../../styles/common/theme";
-import styles from "../../styles/item.module.scss";
+import styles from "../../styles/item/item.module.scss";
 
 export default function ItemPage() {
     const router = useRouter();
@@ -44,17 +43,15 @@ export default function ItemPage() {
     };
 
     const getItemDetail = () => {
-        if (router.isReady && userData.isLoggedIn) {
+        if (userData.isLoggedIn) {
             L.getItemDetail(parseInt(router.query.id as string), setDetail);
         }
     };
 
     useEffect(() => {
-        tryAutoLogin(getItemDetail);
-    }, []);
-
-    useEffect(() => {
-        getItemDetail();
+        if (router.isReady) {
+            tryAutoLogin(getItemDetail);
+        }
     }, [router.query]);
 
     return (
@@ -99,7 +96,7 @@ export default function ItemPage() {
                                     <div className="name">{detail.name}</div>
 
                                     <div className="seller">
-                                        <ShopTwoTone className="seller-icon"/>
+                                        <ShopTwoTone className="seller-icon" />
                                         {detail.sellerAccount}
                                     </div>
 
@@ -109,9 +106,7 @@ export default function ItemPage() {
 
                                     <div className="price">
                                         <em>￥</em>
-                                        {new Decimal(detail.priceCents)
-                                            .div(100)
-                                            .toFixed(2)}
+                                        {detail.priceYuan}
                                     </div>
 
                                     <div className="count">
@@ -159,7 +154,14 @@ export default function ItemPage() {
                                     {detail.sellerAccount ===
                                     userData.account ? (
                                         <div className="buttons">
-                                            <button className="manage">
+                                            <button
+                                                className="manage"
+                                                onClick={() =>
+                                                    router.push(
+                                                        "/item/management/" +
+                                                            router.query.id
+                                                    )
+                                                }>
                                                 管理商品
                                             </button>
                                         </div>
@@ -177,16 +179,16 @@ export default function ItemPage() {
                                     )}
                                 </div>
                             </div>
-                                <div className={styles.divLower}>
-                                    <div className="description-title">
-                                        商品详情
-                                    </div>
+                            <div className={styles.divLower}>
+                                <div className="description-title">
+                                    商品详情
+                                </div>
 
-                                    <Divider />
-                                    
-                                    <div className="description">
-                                        {detail.description}
-                                    </div>
+                                <Divider />
+
+                                <div className="description">
+                                    {detail.description}
+                                </div>
                             </div>
                         </div>
                     )}

@@ -12,6 +12,9 @@ export const tryAutoLogin = (
     gotoLoginOnFail: boolean = true
 ) => {
     if (userData.isLoggedIn) {
+        if (onLogin !== undefined) {
+            onLogin();
+        }
         return;
     }
 

@@ -7,7 +7,7 @@ export interface SingleItemPreview {
     itemId: number;
     name: string;
     previewImageFileName: string;
-    priceCents: number;
+    priceYuan: string;
     purchaseCount: number;
 }
 
@@ -18,6 +18,6 @@ export interface SingleItemDetail {
     description: string;
     previewImageFileName: string;
     remaining: number;
-    priceCents: number;
+    priceYuan: string;
     purchaseCount: number;
 }
