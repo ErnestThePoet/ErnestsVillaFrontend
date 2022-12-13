@@ -10,21 +10,15 @@ export default function SiteFooter() {
 
                     <Divider className="divider" type="vertical" />
 
-                    <a href="https://github.com/ErnestThePoet/TLS-Proxy">
-                        CA平台
-                    </a>
+                    <a href="http://ca.yinkstudio.xyz">Yink&apos;s CA</a>
 
                     <Divider className="divider" type="vertical" />
 
-                    <a href="https://github.com/ErnestThePoet/TLS-Proxy">
-                        网银1
-                    </a>
+                    <a href="http://bank1.yinkstudio.xyz">YYH Bank</a>
 
                     <Divider className="divider" type="vertical" />
 
-                    <a href="https://github.com/ErnestThePoet/TLS-Proxy">
-                        网银2
-                    </a>
+                    <a href="http://bank2.yinkstudio.xyz">HIT Bank</a>
 
                     <Divider className="divider" type="vertical" />
 
