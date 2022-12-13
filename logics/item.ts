@@ -20,8 +20,6 @@ export function getItemDetail(
         .then(res => {
             if (res.data.success) {
                 setResults(res.data.itemDetail);
-            } else {
-                message.error(res.data.msg);
             }
         })
         .catch(reason => {

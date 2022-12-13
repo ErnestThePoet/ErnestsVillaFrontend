@@ -44,7 +44,9 @@ export default function SearchResultPage() {
                 <SiteBkg />
 
                 <div className={styles.divContentWrapper}>
-                    <SearchRow />
+                    <div className={styles.divSearchRowWrapper}>
+                        <SearchRow />
+                    </div>
 
                     {results.length === 0 ? (
                         <div className={styles.divEmptyWrapper}>

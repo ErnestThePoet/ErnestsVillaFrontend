@@ -34,7 +34,9 @@ export default observer(function HomePage() {
                 <SiteBkg />
 
                 <div className={styles.divContentWrapper}>
-                    <SearchRow />
+                    <div className={styles.divSearchRowWrapper}>
+                        <SearchRow />
+                    </div>
 
                     {itemRecommendationData.recommendations.length === 0 ? (
                         <div className={styles.divEmptyWrapper}>

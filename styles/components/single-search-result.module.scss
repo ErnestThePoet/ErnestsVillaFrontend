@@ -1,3 +1,5 @@
+@import "../common/theme";
+
 .divWrapper {
     display: flex;
     flex-direction: column;
@@ -34,7 +36,7 @@
         font-size: 12px;
         
         &:hover{
-            color: #ff5000;
+            color: $price-color;
             text-decoration: underline;
         }
     }
@@ -45,7 +47,7 @@
         align-items: center;
 
         [class~=price]{
-            color: #ff5000;
+            color: $price-color;
             font-size: 22px;
 
             em{
