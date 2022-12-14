@@ -10,6 +10,7 @@ import {
     Row,
     Col,
     Button,
+    Result,
     message
 } from "antd";
 import NavBar from "../components/nav-bar";
@@ -38,7 +39,7 @@ export default function PublishItemPage() {
 
     const [previewImageFileName, setPreviewImageFileName] = useState("");
 
-    const [signupResult, setSignupResult] = useState<FormSubmitResult>({
+    const [formResult, setFormResult] = useState<FormSubmitResult>({
         success: false,
         msg: ""
     });
@@ -88,129 +89,138 @@ export default function PublishItemPage() {
                     <SiteBkg />
 
                     <div className="div-form-wrapper">
-                        <Form
-                            name="form-publish-item"
-                            form={form}
-                            initialValues={{ remember: true }}
-                            onValuesChange={onFormValuesChange}
-                            onFinish={e =>
-                                L.publishItem(
-                                    e.name,
-                                    e.description,
-                                    previewImageFileName,
-                                    e.remaining,
-                                    e.priceYuan,
-                                    setLoading,
-                                    setSignupResult
-                                )
-                            }>
-                            <Row gutter={100}>
-                                <Col>
-                                    <Form.Item
-                                        name="previewImage"
-                                        label="上传商品图片"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: "请上传商品图片"
-                                            }
-                                        ]}>
-                                        <Upload
-                                            accept="image/jpeg,image/png,image/webp"
-                                            action={APIS.uploadPreviewImage}
+                        {formResult.success ? (
+                            <div className="result-wrapper">
+                                <Result
+                                    status="success"
+                                    title="恭喜，您的商品发布成功！"
+                                />
+                            </div>
+                        ) : (
+                            <Form
+                                name="form-publish-item"
+                                form={form}
+                                initialValues={{ remember: true }}
+                                onValuesChange={onFormValuesChange}
+                                onFinish={e =>
+                                    L.publishItem(
+                                        e.name,
+                                        e.description,
+                                        previewImageFileName,
+                                        e.remaining,
+                                        e.priceYuan,
+                                        setLoading,
+                                        setFormResult
+                                    )
+                                }>
+                                <Row gutter={100}>
+                                    <Col>
+                                        <Form.Item
                                             name="previewImage"
-                                            listType="picture-card"
-                                            beforeUpload={beforeUpload}
-                                            onChange={onUploadChange}
-                                            showUploadList={false}>
-                                            {previewImageUrl !== "" ? (
-                                                <img
-                                                    src={previewImageUrl}
-                                                    alt="preview-image"
-                                                    className="img-preview-image"
-                                                />
-                                            ) : (
-                                                <div>
-                                                    <PlusOutlined />
-                                                    <div className="div-upload-label">
-                                                        上传商品图片
+                                            label="上传商品图片"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "请上传商品图片"
+                                                }
+                                            ]}>
+                                            <Upload
+                                                accept="image/jpeg,image/png,image/webp"
+                                                action={APIS.uploadPreviewImage}
+                                                name="previewImage"
+                                                listType="picture-card"
+                                                beforeUpload={beforeUpload}
+                                                onChange={onUploadChange}
+                                                showUploadList={false}>
+                                                {previewImageUrl !== "" ? (
+                                                    <img
+                                                        src={previewImageUrl}
+                                                        alt="preview-image"
+                                                        className="img-preview-image"
+                                                    />
+                                                ) : (
+                                                    <div>
+                                                        <PlusOutlined />
+                                                        <div className="div-upload-label">
+                                                            上传商品图片
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            )}
-                                        </Upload>
-                                    </Form.Item>
+                                                )}
+                                            </Upload>
+                                        </Form.Item>
 
-                                    <Form.Item
-                                        name="name"
-                                        label="商品名称"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: "请输入商品名称"
-                                            }
-                                        ]}>
-                                        <Input className="in-name" />
-                                    </Form.Item>
+                                        <Form.Item
+                                            name="name"
+                                            label="商品名称"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "请输入商品名称"
+                                                }
+                                            ]}>
+                                            <Input className="in-name" />
+                                        </Form.Item>
 
-                                    <Form.Item
-                                        name="description"
-                                        label="商品描述"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: "请输入商品描述"
-                                            }
-                                        ]}>
-                                        <Input.TextArea className="in-description" />
-                                    </Form.Item>
-                                </Col>
+                                        <Form.Item
+                                            name="description"
+                                            label="商品描述"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "请输入商品描述"
+                                                }
+                                            ]}>
+                                            <Input.TextArea className="in-description" />
+                                        </Form.Item>
+                                    </Col>
 
-                                <Col>
-                                    <Form.Item
-                                        name="remaining"
-                                        label="商品库存量"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: "请输入商品库存量"
-                                            }
-                                        ]}>
-                                        <InputNumber size="large" min={1} />
-                                    </Form.Item>
+                                    <Col>
+                                        <Form.Item
+                                            name="remaining"
+                                            label="商品库存量"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "请输入商品库存量"
+                                                }
+                                            ]}>
+                                            <InputNumber size="large" min={1} />
+                                        </Form.Item>
 
-                                    <Form.Item
-                                        name="priceYuan"
-                                        className="form-item-price"
-                                        label="商品价格（元，精确到分）"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: "请输入商品价格"
-                                            }
-                                        ]}>
-                                        <InputNumber<string>
-                                            size="large"
-                                            min="0.01"
-                                            max="100000"
-                                            precision={2}
-                                            stringMode
-                                        />
-                                    </Form.Item>
+                                        <Form.Item
+                                            name="priceYuan"
+                                            className="form-item-price"
+                                            label="商品价格（元，精确到分）"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "请输入商品价格"
+                                                }
+                                            ]}>
+                                            <InputNumber<string>
+                                                size="large"
+                                                min="0.01"
+                                                max="100000"
+                                                precision={2}
+                                                stringMode
+                                            />
+                                        </Form.Item>
 
-                                    <Form.Item
-                                        validateStatus="error"
-                                        help={signupResult.msg}>
-                                        <Button
-                                            type="primary"
-                                            htmlType="submit"
-                                            block
-                                            loading={loading}>
-                                            发布商品
-                                        </Button>
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-                        </Form>
+                                        <Form.Item
+                                            validateStatus="error"
+                                            help={formResult.msg}>
+                                            <Button
+                                                type="primary"
+                                                htmlType="submit"
+                                                block
+                                                loading={loading}>
+                                                发布商品
+                                            </Button>
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        )}
                     </div>
                 </main>
 

@@ -12,10 +12,10 @@ export function publishItem(
     remaining: number,
     priceYuan: string,
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    setLoginResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
+    setFormResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
 ) {
     if (previewImageFileName === "") {
-        setLoginResult({
+        setFormResult({
             success: false,
             msg: "请上传商品图片"
         });
@@ -36,14 +36,12 @@ export function publishItem(
         })
         .then(res => {
             if (res.data.success) {
-                setLoginResult({
+                setFormResult({
                     success: true,
                     msg: ""
                 });
-
-                Router.push("/publish-success");
             } else {
-                setLoginResult({
+                setFormResult({
                     success: false,
                     msg: res.data.msg
                 });

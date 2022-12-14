@@ -6,6 +6,10 @@
 
     padding: 10px 50px;
 
+    [class~=result-wrapper]{
+        margin: 70px 0;
+    }
+
     [class~="div-form-wrapper"] {
         width: 100%;
 
@@ -39,8 +43,8 @@
             margin: 50px 0;
         }
 
-        button[type="submit"] {
-            background-color: #f05355;
+        button[class~="btn-management"] {
+            width: 150px;
         }
 
         [class~="empty-wrapper"] {

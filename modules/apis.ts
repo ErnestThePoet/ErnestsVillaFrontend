@@ -16,6 +16,8 @@ const APIS = {
 
     uploadPreviewImage: "seller/upload_preview_image",
     publishItem: "seller/publish",
+    updateItem: "seller/update",
+    deleteItem: "seller/delete",
 
     getItemRecommendations: "customer/get_recommendations",
     search: "customer/search",

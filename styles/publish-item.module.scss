@@ -6,6 +6,10 @@
 
     padding: 10px 50px;
 
+    [class~=result-wrapper]{
+        margin: 70px 0;
+    }
+
     [class~="div-form-wrapper"] {
         width: 100%;
 

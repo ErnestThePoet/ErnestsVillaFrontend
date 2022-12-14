@@ -11,7 +11,9 @@ import {
     Row,
     Col,
     Button,
-    message
+    Result,
+    message,
+    Space
 } from "antd";
 import NavBar from "../../../components/nav-bar";
 import SiteBkg from "../../../components/site-bkg";
@@ -35,6 +37,8 @@ import userData from "../../../states/user-data";
 export default function ManageItemPage() {
     const router = useRouter();
 
+    const [itemId, setItemId] = useState(-1);
+
     const [isDetailFetched, setIsDetailFetched] = useState(false);
 
     const [form] = Form.useForm();
@@ -44,7 +48,7 @@ export default function ManageItemPage() {
 
     const [previewImageFileName, setPreviewImageFileName] = useState("");
 
-    const [signupResult, setSignupResult] = useState<FormSubmitResult>({
+    const [formResult, setFormResult] = useState<FormSubmitResult>({
         success: false,
         msg: ""
     });
@@ -70,7 +74,9 @@ export default function ManageItemPage() {
 
     const getItemDetail = () => {
         if (userData.isLoggedIn) {
-            L.getItemDetail(parseInt(router.query.mid as string), setDetail);
+            const itemIdQuery = parseInt(router.query.mid as string);
+            setItemId(itemIdQuery);
+            L.getItemDetail(itemIdQuery, setDetail);
         }
     };
 
@@ -126,129 +132,159 @@ export default function ManageItemPage() {
 
                     <div className="div-form-wrapper">
                         {isDetailFetched ? (
-                            <Form
-                                name="form-publish-item"
-                                form={form}
-                                initialValues={{ remember: true }}
-                                onValuesChange={onFormValuesChange}
-                                onFinish={e =>
-                                    L.publishItem(
-                                        e.name,
-                                        e.description,
-                                        previewImageFileName,
-                                        e.remaining,
-                                        e.priceYuan,
-                                        setLoading,
-                                        setSignupResult
-                                    )
-                                }>
-                                <Row gutter={100}>
-                                    <Col>
-                                        <Form.Item
-                                            name="previewImage"
-                                            label="上传商品图片"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "请上传商品图片"
-                                                }
-                                            ]}>
-                                            <Upload
-                                                accept="image/jpeg,image/png,image/webp"
-                                                action={APIS.uploadPreviewImage}
+                            formResult.success ? (
+                                <div className="result-wrapper">
+                                    <Result status="success" title="操作成功" />
+                                </div>
+                            ) : (
+                                <Form
+                                    name="form-publish-item"
+                                    form={form}
+                                    initialValues={{ remember: true }}
+                                    onValuesChange={onFormValuesChange}
+                                    onFinish={e =>
+                                        L.updateItem(
+                                            itemId,
+                                            e.name,
+                                            e.description,
+                                            previewImageFileName,
+                                            e.remaining,
+                                            e.priceYuan,
+                                            setLoading,
+                                            setFormResult
+                                        )
+                                    }>
+                                    <Row gutter={100}>
+                                        <Col>
+                                            <Form.Item
                                                 name="previewImage"
-                                                listType="picture-card"
-                                                beforeUpload={beforeUpload}
-                                                onChange={onUploadChange}
-                                                showUploadList={false}>
-                                                {previewImageUrl !== "" ? (
-                                                    <img
-                                                        src={previewImageUrl}
-                                                        alt="preview-image"
-                                                        className="img-preview-image"
-                                                    />
-                                                ) : (
-                                                    <div>
-                                                        <PlusOutlined />
-                                                        <div className="div-upload-label">
-                                                            上传商品图片
+                                                label="上传商品图片">
+                                                <Upload
+                                                    accept="image/jpeg,image/png,image/webp"
+                                                    action={
+                                                        APIS.uploadPreviewImage
+                                                    }
+                                                    name="previewImage"
+                                                    listType="picture-card"
+                                                    beforeUpload={beforeUpload}
+                                                    onChange={onUploadChange}
+                                                    showUploadList={false}>
+                                                    {previewImageUrl !== "" ? (
+                                                        <img
+                                                            src={
+                                                                previewImageUrl
+                                                            }
+                                                            alt="preview-image"
+                                                            className="img-preview-image"
+                                                        />
+                                                    ) : (
+                                                        <div>
+                                                            <PlusOutlined />
+                                                            <div className="div-upload-label">
+                                                                上传商品图片
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )}
-                                            </Upload>
-                                        </Form.Item>
+                                                    )}
+                                                </Upload>
+                                            </Form.Item>
 
-                                        <Form.Item
-                                            name="name"
-                                            label="商品名称"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "请输入商品名称"
-                                                }
-                                            ]}>
-                                            <Input className="in-name" />
-                                        </Form.Item>
+                                            <Form.Item
+                                                name="name"
+                                                label="商品名称"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            "请输入商品名称"
+                                                    }
+                                                ]}>
+                                                <Input className="in-name" />
+                                            </Form.Item>
 
-                                        <Form.Item
-                                            name="description"
-                                            label="商品描述"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "请输入商品描述"
-                                                }
-                                            ]}>
-                                            <Input.TextArea className="in-description" />
-                                        </Form.Item>
-                                    </Col>
+                                            <Form.Item
+                                                name="description"
+                                                label="商品描述"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            "请输入商品描述"
+                                                    }
+                                                ]}>
+                                                <Input.TextArea className="in-description" />
+                                            </Form.Item>
+                                        </Col>
 
-                                    <Col>
-                                        <Form.Item
-                                            name="remaining"
-                                            label="商品库存量"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "请输入商品库存量"
-                                                }
-                                            ]}>
-                                            <InputNumber size="large" min={1} />
-                                        </Form.Item>
+                                        <Col>
+                                            <Form.Item
+                                                name="remaining"
+                                                label="商品库存量"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            "请输入商品库存量"
+                                                    }
+                                                ]}>
+                                                <InputNumber
+                                                    size="large"
+                                                    min={1}
+                                                />
+                                            </Form.Item>
 
-                                        <Form.Item
-                                            name="priceYuan"
-                                            className="form-item-price"
-                                            label="商品价格（元，精确到分）"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "请输入商品价格"
-                                                }
-                                            ]}>
-                                            <InputNumber<string>
-                                                size="large"
-                                                min="0.01"
-                                                max="100000"
-                                                precision={2}
-                                                stringMode
-                                            />
-                                        </Form.Item>
+                                            <Form.Item
+                                                name="priceYuan"
+                                                className="form-item-price"
+                                                label="商品价格（元，精确到分）"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            "请输入商品价格"
+                                                    }
+                                                ]}>
+                                                <InputNumber<string>
+                                                    size="large"
+                                                    min="0.01"
+                                                    max="100000"
+                                                    precision={2}
+                                                    stringMode
+                                                />
+                                            </Form.Item>
 
-                                        <Form.Item
-                                            validateStatus="error"
-                                            help={signupResult.msg}>
-                                            <Button
-                                                type="primary"
-                                                htmlType="submit"
-                                                block
-                                                loading={loading}>
-                                                发布商品
-                                            </Button>
-                                        </Form.Item>
-                                    </Col>
-                                </Row>
-                            </Form>
+                                            <Form.Item
+                                                validateStatus="error"
+                                                help={formResult.msg}>
+                                                <Space>
+                                                    <Button
+                                                        className="btn-management"
+                                                        htmlType="submit"
+                                                        block
+                                                        loading={loading}>
+                                                        修改商品
+                                                    </Button>
+
+                                                    <Button
+                                                        className="btn-management"
+                                                        type="primary"
+                                                        danger
+                                                        block
+                                                        loading={loading}
+                                                        onClick={() =>
+                                                            L.deleteItem(
+                                                                itemId,
+                                                                setLoading,
+                                                                setFormResult
+                                                            )
+                                                        }>
+                                                        删除商品
+                                                    </Button>
+                                                </Space>
+                                            </Form.Item>
+                                        </Col>
+                                    </Row>
+                                </Form>
+                            )
                         ) : (
                             <div className="empty-wrapper">
                                 <Empty description="您访问的商品不存在哦" />
