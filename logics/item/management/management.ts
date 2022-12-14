@@ -1,5 +1,4 @@
 import axios from "axios";
-import Router from "next/router";
 import APIS from "../../../modules/apis";
 import { message } from "antd";
 import userData from "../../../states/user-data";
