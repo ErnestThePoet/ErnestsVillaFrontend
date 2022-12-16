@@ -1,17 +1,31 @@
 import React from "react";
-import * as RULES from "../../modules/form-rules";
-import { Button, Form, Input, Space } from "antd";
-import { CheckCircleTwoTone } from "@ant-design/icons";
-import type { FormSubmitResult } from "../../modules/types";
+import * as RULES from "../../../modules/form-rules";
+import { Button, Form, Input, Space, Result } from "antd";
+import type { FormSubmitResult } from "../../../modules/types";
 
 interface BankAccountBindFormProps {
     name: string;
     loading: boolean;
     result: FormSubmitResult;
+    onReBindClick: () => void;
     onFinish: (values: any) => void;
 }
 
 export function BankAccountBindForm(props: BankAccountBindFormProps) {
+    if (props.result.success) {
+        return (
+            <Result
+                status="success"
+                title="认证成功"
+                extra={[
+                    <Button key="0" type="link" onClick={props.onReBindClick}>
+                        重新认证
+                    </Button>
+                ]}
+            />
+        );
+    }
+
     return (
         <Form name={props.name} onFinish={props.onFinish}>
             <Form.Item
@@ -36,20 +50,13 @@ export function BankAccountBindForm(props: BankAccountBindFormProps) {
             </Form.Item>
 
             <Form.Item validateStatus="error" help={props.result.msg}>
-                {props.result.success ? (
-                    <Space style={{ width: "100%", justifyContent: "center" }}>
-                        <CheckCircleTwoTone twoToneColor="#52c41a" />
-                        <span>认证通过</span>
-                    </Space>
-                ) : (
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        block
-                        loading={props.loading}>
-                        提交认证
-                    </Button>
-                )}
+                <Button
+                    type="primary"
+                    htmlType="submit"
+                    block
+                    loading={props.loading}>
+                    提交认证
+                </Button>
             </Form.Item>
         </Form>
     );

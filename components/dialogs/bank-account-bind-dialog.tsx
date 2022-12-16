@@ -5,7 +5,7 @@ import type {
     BankAccountBindResult,
     FormSubmitResult
 } from "../../modules/types";
-import { BankAccountBindForm } from "../login/bank-account-bind.form";
+import { BankAccountBindForm } from "./bank-account-bind-dialog/bank-account-bind.form";
 
 interface BankAccountBindDialogProps {
     isOpen: boolean;
@@ -38,6 +38,17 @@ export function BankAccountBindDialog(props: BankAccountBindDialogProps) {
                     name="form_bank_account_bind_1"
                     loading={isBank1Loading}
                     result={bank1SubmitResult}
+                    onReBindClick={() => {
+                        props.setBindResult({
+                            bank1Success: false,
+                            bank1Account: ""
+                        });
+
+                        setBank1SubmitResult({
+                            success: false,
+                            msg: ""
+                        });
+                    }}
                     onFinish={e =>
                         L.submitBank1Bind(
                             e.account,
@@ -59,6 +70,17 @@ export function BankAccountBindDialog(props: BankAccountBindDialogProps) {
                     name="form_bank_account_bind_2"
                     loading={isBank2Loading}
                     result={bank2SubmitResult}
+                    onReBindClick={() => {
+                        props.setBindResult({
+                            bank2Success: false,
+                            bank2Account: ""
+                        });
+
+                        setBank2SubmitResult({
+                            success: false,
+                            msg: ""
+                        });
+                    }}
                     onFinish={e =>
                         L.submitBank2Bind(
                             e.account,
