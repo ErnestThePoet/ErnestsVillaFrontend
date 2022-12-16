@@ -1,4 +1,4 @@
-import { WITH_TLS_PROXY } from "./url-env";
+import { WITH_TLS_PROXY } from "./url-env.mjs";
 
 let cdnBase = "http://localhost:17570/cdn/";
 
@@ -10,7 +10,7 @@ const CDNS = {
     images: "images/"
 };
 
-for (let i in CDNS) {
+for (const i in CDNS) {
     CDNS[i] = cdnBase + CDNS[i];
 }
 

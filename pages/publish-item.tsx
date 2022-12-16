@@ -98,7 +98,7 @@ export default function PublishItemPage() {
                             </div>
                         ) : (
                             <Form
-                                name="form-publish-item"
+                                name="form_publish_item"
                                 form={form}
                                 initialValues={{ remember: true }}
                                 onValuesChange={onFormValuesChange}

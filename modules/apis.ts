@@ -1,9 +1,10 @@
-import { WITH_TLS_PROXY } from "./url-env";
+// js modules have to be imported with explicit suffix
+import { WITH_TLS_PROXY } from "./url-env.mjs";
 
 let urlPrefix = "http://localhost:17570/api/";
 
 if (WITH_TLS_PROXY) {
-    urlPrefix = "http://market.yinkstudio.xyz:17750/api/";
+    urlPrefix = "http://market.yinkstudio.xyz/api/";
 }
 
 const APIS = {
@@ -24,7 +25,7 @@ const APIS = {
     getItemDetail: "customer/get_item_detail"
 };
 
-for (let i in APIS) {
+for (const i in APIS) {
     APIS[i] = urlPrefix + APIS[i];
 }
 

@@ -40,7 +40,7 @@ export default observer(function HomePage() {
 
                     {itemRecommendationData.recommendations.length === 0 ? (
                         <div className={styles.divEmptyWrapper}>
-                            <Empty description="未搜索到任何商品" />
+                            <Empty description="未获取到任何商品" />
                         </div>
                     ) : (
                         <div className={styles.divItemShowWrapper}>

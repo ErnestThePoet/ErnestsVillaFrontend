@@ -3,24 +3,16 @@ import Router from "next/router";
 import APIS from "../modules/apis";
 import userData from "../states/user-data";
 import { message } from "antd";
-import type { FormSubmitResult } from "../modules/types";
+import type { BankAccountBindResult, FormSubmitResult } from "../modules/types";
 import signupSuccessPageData from "../states/signup-success-page-data";
 
 export const login = (
+    account: string,
+    password: string,
+    remember: boolean,
     setIsLoggingIn: React.Dispatch<React.SetStateAction<boolean>>,
-    setLoginResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>,
+    setLoginResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
 ) => {
-    const account = (<HTMLInputElement>(
-        document.getElementById("in-login-account")
-    )).value;
-
-    const password = (<HTMLInputElement>(
-        document.getElementById("in-login-password")
-    )).value;
-
-    const remember = (<HTMLInputElement>document.getElementById("cb-remember"))
-        .checked;
-
     setIsLoggingIn(true);
 
     axios
@@ -58,25 +50,35 @@ export const login = (
 };
 
 export const signup = (
+    account: string,
+    password: string,
+    passwordConfirm: string,
+    bankAccountBindResult: BankAccountBindResult,
     setIsSigningUp: React.Dispatch<React.SetStateAction<boolean>>,
     setSignupResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
 ) => {
-    const account = (<HTMLInputElement>(
-        document.getElementById("in-signup-account")
-    )).value;
-
-    const password = (<HTMLInputElement>(
-        document.getElementById("in-signup-password")
-    )).value;
-
-    const passwordConfirm = (<HTMLInputElement>(
-        document.getElementById("in-signup-password-confirm")
-    )).value;
-
     if (password !== passwordConfirm) {
         setSignupResult({
             success: false,
             msg: "两次密码输入不一致"
+        });
+
+        return;
+    }
+
+    if (!bankAccountBindResult.bank1Success) {
+        setSignupResult({
+            success: false,
+            msg: "YYH Bank网银账号认证未完成"
+        });
+
+        return;
+    }
+
+    if (!bankAccountBindResult.bank2Success) {
+        setSignupResult({
+            success: false,
+            msg: "HIT Bank网银账号认证未完成"
         });
 
         return;
@@ -87,6 +89,8 @@ export const signup = (
     axios
         .postForm(APIS.signup, {
             account,
+            bank1Account: bankAccountBindResult.bank1Account,
+            bank2Account: bankAccountBindResult.bank2Account,
             password
         })
         .then(res => {

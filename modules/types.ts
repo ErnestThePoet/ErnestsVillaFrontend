@@ -21,3 +21,13 @@ export interface SingleItemDetail {
     priceYuan: string;
     purchaseCount: number;
 }
+
+export type Bank = "YYH" | "HIT";
+
+export interface BankAccountBindResult {
+    bank1Success?: boolean;
+    bank1Account?: string;
+
+    bank2Success?: boolean;
+    bank2Account?: string;
+}
