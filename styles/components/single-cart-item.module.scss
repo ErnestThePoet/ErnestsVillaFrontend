@@ -1,0 +1,63 @@
+@import "../common/theme";
+
+.divItemWrapper {
+    display: flex;
+
+    > [class~="preview"] {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+.divDetail {
+    margin-left: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    > [class~="name"] {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    > [class~="price"] {
+        margin-top: 5px;
+        font-size: 14px;
+
+        > span[class~="price-label"] {
+            color: #7f7f7f;
+        }
+
+        > span[class~="price-value"] {
+            font-weight: bold;
+        }
+    }
+
+    > [class~="count"] {
+        margin-top: 5px;
+        width: 130px;
+    }
+
+    > [class~="bottom"] {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        > [class~="total-price"] {
+            font-size: 14px;
+
+            > span[class~="total-price-label"] {
+                color: #7f7f7f;
+            }
+
+            > span[class~="total-price-value"] {
+                color: $price-color;
+                font-weight: bold;
+            }
+
+            > [class~="delete"] {
+                margin-left: auto;
+            }
+        }
+    }
+}

@@ -12,11 +12,11 @@
 
     transition-duration: 500ms;
 
-    &:hover{
+    &:hover {
         border-color: #ff915e;
     }
 
-    [class~="preview"] {
+    > [class~="preview"] {
         width: 150px;
         height: 150px;
         border-radius: 10px;
@@ -29,31 +29,31 @@
     flex-direction: column;
     justify-content: space-between;
 
-    [class~=name]{
+    > [class~="name"] {
         font-size: 16px;
-        
-        &:hover{
+
+        &:hover {
             color: $price-color;
         }
     }
 
-    [class~=price-purchase]{
+    > [class~="price-purchase"] {
         display: flex;
         justify-content: space-between;
         align-items: center;
 
-        [class~=price]{
+        > [class~="price"] {
             color: $price-color;
             font-size: 22px;
 
-            em{
+            em {
                 font-size: 14px;
                 font-style: normal;
                 margin-right: 4px;
             }
         }
 
-        [class~=purchase-count]{
+        > [class~="purchase-count"] {
             color: #888;
             font-size: 13px;
         }

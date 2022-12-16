@@ -1,0 +1,25 @@
+@import "../common/theme";
+
+.divEmptyWrapper {
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divTotalPrice {
+    > [class~="total-price-label"] {
+        font-size: 14px;
+    }
+
+    > [class~="total-price-value"] {
+        color: $price-color;
+        font-size: 28px;
+
+        > em {
+            font-size: 16px;
+            font-style: normal;
+        }
+    }
+}

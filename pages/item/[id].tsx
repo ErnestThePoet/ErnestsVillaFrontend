@@ -1,5 +1,5 @@
-import { ConfigProvider, InputNumber, Divider, Empty } from "antd";
-import { PlusOutlined, MinusOutlined, ShopTwoTone } from "@ant-design/icons";
+import { ConfigProvider, Divider, Empty } from "antd";
+import { ShopTwoTone } from "@ant-design/icons";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -14,6 +14,7 @@ import type { SingleItemDetail } from "../../modules/types";
 import userData from "../../states/user-data";
 import { ORANGE } from "../../styles/common/theme";
 import styles from "../../styles/item/item.module.scss";
+import ItemNumberInput from "../../components/item-number-input";
 
 export default function ItemPage() {
     const router = useRouter();
@@ -21,26 +22,6 @@ export default function ItemPage() {
     const [detail, setDetail] = useState<SingleItemDetail>();
 
     const [count, setCount] = useState(1);
-
-    const changeCount = (op: "INC" | "DEC") => {
-        switch (op) {
-            case "INC":
-                return () => {
-                    if (
-                        detail?.remaining !== undefined &&
-                        count < detail.remaining
-                    ) {
-                        setCount(count + 1);
-                    }
-                };
-            case "DEC":
-                return () => {
-                    if (count > 1) {
-                        setCount(count - 1);
-                    }
-                };
-        }
-    };
 
     const getItemDetail = () => {
         if (userData.isLoggedIn) {
@@ -114,34 +95,14 @@ export default function ItemPage() {
                                             数量：
                                         </span>
 
-                                        <InputNumber
+                                        <ItemNumberInput
                                             className="in-count"
-                                            controls={false}
-                                            addonBefore={
-                                                <div
-                                                    className="count-control"
-                                                    onClick={changeCount(
-                                                        "DEC"
-                                                    )}>
-                                                    <MinusOutlined />
-                                                </div>
-                                            }
-                                            addonAfter={
-                                                <div
-                                                    className="count-control"
-                                                    onClick={changeCount(
-                                                        "INC"
-                                                    )}>
-                                                    <PlusOutlined />
-                                                </div>
-                                            }
                                             value={count}
                                             onChange={e =>
                                                 setCount(e as number)
                                             }
                                             min={1}
                                             max={detail.remaining}
-                                            step={1}
                                         />
 
                                         <span className="remaining">
@@ -170,7 +131,11 @@ export default function ItemPage() {
                                             <button className="buy">
                                                 立即购买
                                             </button>
-                                            <button className="add-cart">
+                                            <button
+                                                className="add-cart"
+                                                onClick={() =>
+                                                    L.addToCart(detail, count)
+                                                }>
                                                 添加到购物车
                                             </button>
                                         </div>

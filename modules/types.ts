@@ -22,6 +22,11 @@ export interface SingleItemDetail {
     purchaseCount: number;
 }
 
+export interface SingleItemPurchaseWish {
+    item: SingleItemDetail;
+    count: number;
+}
+
 export type Bank = "YYH" | "HIT";
 
 export interface BankAccountBindResult {

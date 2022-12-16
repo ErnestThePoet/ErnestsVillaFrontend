@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import type { SingleItemPreview } from "../modules/types";
 import CDNS, { getCdnUrl } from "../modules/cdns";
-import styles from "../styles/components/single-showed-item.module.scss";
+import styles from "../styles/components/single-item-recommendation.module.scss";
 import { useRouter } from "next/router";
 import userData from "../states/user-data";
 

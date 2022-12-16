@@ -36,7 +36,10 @@ export default observer(function SearchRow() {
             />
 
             <Badge count={shoppingCartData.cartItems.length}>
-                <Button icon={<ShoppingCartOutlined />} size="large">
+                <Button
+                    icon={<ShoppingCartOutlined />}
+                    size="large"
+                    onClick={() => shoppingCartData.setIsDrawerOpen(true)}>
                     我的购物车
                 </Button>
             </Badge>

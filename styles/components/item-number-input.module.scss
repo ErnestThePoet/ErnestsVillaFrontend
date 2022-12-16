@@ -1,0 +1,20 @@
+.divCountControl {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    margin: 0 -11px;
+    cursor: pointer;
+
+    user-select: none;
+
+    > span {
+        transition-duration: 200ms;
+        color: #777;
+    }
+
+    &:hover {
+        > span {
+            color: black;
+        }
+    }
+}

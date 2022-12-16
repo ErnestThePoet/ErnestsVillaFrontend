@@ -1,22 +1,55 @@
 import { makeAutoObservable } from "mobx";
+import Decimal from "decimal.js";
+import type { SingleItemPurchaseWish } from "../modules/types";
 
-interface CartItem {
-    itemId: number;
-    name: string;
-    previewImageFileName: string;
-
-    count: number;
-}
-
-class ShoppingCartData{
+class ShoppingCartData {
     constructor() {
-        makeAutoObservable(this);
+        makeAutoObservable(this, {
+            doesItemExist: false
+        });
     }
 
-    cartItems: CartItem[] = [];
+    isDrawerOpen: boolean = false;
 
-    setCartItems(value: CartItem[]) {
+    setIsDrawerOpen(value: boolean) {
+        this.isDrawerOpen = value;
+    }
+
+    cartItems: SingleItemPurchaseWish[] = [];
+
+    setCartItems(value: SingleItemPurchaseWish[]) {
         this.cartItems = value;
+    }
+
+    addCartItem(item: SingleItemPurchaseWish) {
+        this.cartItems.push(item);
+    }
+
+    changeCount(index: number, count: number) {
+        this.cartItems[index] = { ...this.cartItems[index], count };
+    }
+
+    deleteItem(index: number) {
+        this.cartItems.splice(index, 1);
+    }
+
+    getItemTotalPriceYuan(index: number) {
+        return new Decimal(this.cartItems[index].item.priceYuan)
+            .mul(this.cartItems[index].count)
+            .toFixed(2);
+    }
+
+    get totalPriceYuan() {
+        return this.cartItems
+            .reduce(
+                (p, _, i) => p.add(this.getItemTotalPriceYuan(i)),
+                new Decimal(0)
+            )
+            .toFixed(2);
+    }
+
+    doesItemExist(itemId: number) {
+        return this.cartItems.some(x => x.item.itemId === itemId);
     }
 }
 
