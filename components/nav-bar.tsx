@@ -50,6 +50,12 @@ export default observer(function NavBar() {
 
             <Divider className="divider" type="vertical" />
 
+            <Link className="href" href="/">
+                云安
+            </Link>
+
+            <Divider className="divider" type="vertical" />
+
             <Link className="href" href="/publish-item">
                 发布商品
             </Link>
