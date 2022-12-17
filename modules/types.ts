@@ -23,6 +23,7 @@ export interface SingleItemDetail {
 }
 
 export interface SingleItemPurchaseWish {
+    id: number;
     item: SingleItemDetail;
     count: number;
 }

@@ -29,6 +29,10 @@ class ShoppingCartData {
         this.cartItems[index] = { ...this.cartItems[index], count };
     }
 
+    changeId(index: number, id: number) {
+        this.cartItems[index] = { ...this.cartItems[index], id };
+    }
+
     deleteItem(index: number) {
         this.cartItems.splice(index, 1);
     }

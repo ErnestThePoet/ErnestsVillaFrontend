@@ -1,9 +1,29 @@
 import axios from "axios";
 import Router from "next/router";
 import APIS from "../modules/apis";
+import { message } from "antd";
 import userData from "../states/user-data";
+import shoppingCartData from "../states/shopping-cart-data";
 
-export const fetchCartData = () => {};
+export const fetchCartData = () => {
+    axios
+        .get(APIS.getCartItems, {
+            params: {
+                accessId: userData.accessId
+            }
+        })
+        .then(res => {
+            if (res.data.success) {
+                shoppingCartData.setCartItems(res.data.cartItems);
+            } else {
+                message.error(res.data.msg);
+            }
+        })
+        .catch(reason => {
+            console.log(reason);
+            message.error(reason.message);
+        });
+};
 
 export const tryAutoLogin = (
     onLogin?: () => void,
@@ -11,6 +31,7 @@ export const tryAutoLogin = (
 ) => {
     if (userData.isLoggedIn) {
         if (onLogin !== undefined) {
+            fetchCartData();
             onLogin();
         }
         return;
@@ -34,6 +55,7 @@ export const tryAutoLogin = (
                         res.data.accessId
                     );
                     if (onLogin !== undefined) {
+                        fetchCartData();
                         onLogin();
                     }
                 } else if (gotoLoginOnFail) {

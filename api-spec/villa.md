@@ -212,6 +212,7 @@ interface SingleItemDetail {
 }
 
 interface SingleItemPurchaseWish {
+    id:number;
     item: SingleItemDetail;
     count: number;
 }
@@ -268,6 +269,19 @@ interface SingleItemPurchaseWish {
     accessId:string;
     id:number;
     count:number;
+}
+* 返回类型：json
+* 返回格式：
+{
+    success:boolean;
+    msg:string;
+}
+
+#### 清空用户购物车
+* 请求方法：DELETE
+* 请求参数：表单
+{
+    accessId:string;
 }
 * 返回类型：json
 * 返回格式：

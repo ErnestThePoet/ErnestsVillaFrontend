@@ -37,7 +37,5 @@ export const changePw = () => {
             console.log(reason);
             message.error(reason.message);
         })
-        .finally(() => {
-            changePwDialogState.setIsConfirmLoading(false);
-        });
+        .finally(() => changePwDialogState.setIsConfirmLoading(false));
 };

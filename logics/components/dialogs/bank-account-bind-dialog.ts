@@ -67,9 +67,7 @@ export function submitBank1Bind(
                 bank1Success: false
             });
         })
-        .finally(() => {
-            setIsLoading(false);
-        });
+        .finally(() => setIsLoading(false));
 }
 
 export function submitBank2Bind(
@@ -132,7 +130,5 @@ export function submitBank2Bind(
                 bank2Success: false
             });
         })
-        .finally(() => {
-            setIsLoading(false);
-        });
+        .finally(() => setIsLoading(false));
 }

@@ -8,7 +8,6 @@ if (WITH_TLS_PROXY) {
 }
 
 const APIS = {
-    // User general
     signup: "user/signup",
     login: "user/login",
     autoLogin: "user/auto_login",
@@ -22,7 +21,13 @@ const APIS = {
 
     getItemRecommendations: "customer/get_recommendations",
     search: "customer/search",
-    getItemDetail: "customer/get_item_detail"
+    getItemDetail: "customer/get_item_detail",
+
+    getCartItems: "customer/get_cart_items",
+    addToCart: "customer/add_to_cart",
+    deleteFromCart: "customer/delete_from_cart",
+    updateCartItemCount: "customer/update_cart_item_count",
+    clearUserCart: "customer/clear_user_cart"
 };
 
 for (const i in APIS) {

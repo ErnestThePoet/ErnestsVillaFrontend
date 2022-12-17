@@ -35,10 +35,26 @@ export function addToCart(detail: SingleItemDetail, count: number) {
         return;
     }
 
-    shoppingCartData.addCartItem({
-        item: detail,
-        count
-    });
-
-    message.success("添加成功，在购物车等亲~");
+    axios
+        .postForm(APIS.addToCart, {
+            accessId: userData.accessId,
+            itemId: detail.itemId,
+            count
+        })
+        .then(res => {
+            if (res.data.success) {
+                shoppingCartData.addCartItem({
+                    id: res.data.id,
+                    item: detail,
+                    count
+                });
+                message.success("添加成功，在购物车等亲~");
+            } else {
+                message.error(res.data.msg);
+            }
+        })
+        .catch(reason => {
+            console.log(reason);
+            message.error(reason.message);
+        });
 }
