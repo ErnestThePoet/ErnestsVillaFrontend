@@ -5,7 +5,13 @@ import { message } from "antd";
 import userData from "../states/user-data";
 import shoppingCartData from "../states/shopping-cart-data";
 
-export const fetchCartData = () => {
+// This does not need to be invoked after manual login
+// after which we will go to index and call tryAutoLogin.
+const afterLoginActions = () => {
+    fetchCartData();
+};
+
+const fetchCartData = () => {
     axios
         .get(APIS.getCartItems, {
             params: {
@@ -31,7 +37,7 @@ export const tryAutoLogin = (
 ) => {
     if (userData.isLoggedIn) {
         if (onLogin !== undefined) {
-            fetchCartData();
+            afterLoginActions();
             onLogin();
         }
         return;
@@ -55,7 +61,7 @@ export const tryAutoLogin = (
                         res.data.accessId
                     );
                     if (onLogin !== undefined) {
-                        fetchCartData();
+                        afterLoginActions();
                         onLogin();
                     }
                 } else if (gotoLoginOnFail) {

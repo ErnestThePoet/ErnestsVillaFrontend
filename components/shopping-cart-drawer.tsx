@@ -4,6 +4,7 @@ import shoppingCartData from "../states/shopping-cart-data";
 import SingleCartItem from "./single-cart-item";
 import * as L from "../logics/components/shopping-cart-drawer";
 import styles from "../styles/components/shopping-cart-drawer.module.scss";
+import { getTotalPriceYuan } from "../modules/currency";
 
 export default observer(function ShoppingCartDrawer() {
     return (
@@ -17,11 +18,13 @@ export default observer(function ShoppingCartDrawer() {
 
                             <span className="total-price-value">
                                 <em>￥</em>
-                                {shoppingCartData.totalPriceYuan}
+                                {getTotalPriceYuan(shoppingCartData.cartItems)}
                             </span>
                         </div>
 
-                        <Button type="primary">结算</Button>
+                        <Button type="primary" onClick={() => L.createOrder()}>
+                            结算
+                        </Button>
                     </Space>
                 )
             }
@@ -32,10 +35,10 @@ export default observer(function ShoppingCartDrawer() {
             open={shoppingCartData.isDrawerOpen}>
             {shoppingCartData.cartItems.length > 0 ? (
                 <Space direction="vertical" size={20}>
-                    {shoppingCartData.cartItems.map((_, i) => (
+                    {shoppingCartData.cartItems.map((x, i) => (
                         <SingleCartItem
                             key={i}
-                            index={i}
+                            purchaseWish={x}
                             onCountChange={e => L.updateCartItemCount(i, e)}
                             onDeleteClick={() => L.deleteFromCart(i)}
                         />

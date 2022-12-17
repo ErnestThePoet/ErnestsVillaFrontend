@@ -289,3 +289,20 @@ interface SingleItemPurchaseWish {
     success:boolean;
     msg:string;
 }
+
+#### 创建订单
+* 请求方法：POST
+* 请求参数：表单
+{
+    accessId:string;
+    items:Array<{
+        itemId:number;
+        count:number;
+    }>
+}
+* 返回类型：json
+* 返回格式：
+{
+    success:boolean;
+    msg:string;
+}

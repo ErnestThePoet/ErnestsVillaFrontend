@@ -25,7 +25,7 @@ class UserData {
         this.isLoggedIn = true;
     }
 
-    clearUserData() {
+    clear() {
         this.account = "";
         this.bank1Account = "";
         this.bank2Account = "";

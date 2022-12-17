@@ -2,6 +2,7 @@ import { message } from "antd";
 import axios from "axios";
 import Router from "next/router";
 import APIS from "../../modules/apis";
+import createOrderData from "../../states/create-order-data";
 import shoppingCartData from "../../states/shopping-cart-data";
 import userData from "../../states/user-data";
 
@@ -45,4 +46,12 @@ export function updateCartItemCount(index: number, count: number) {
             console.log(reason);
             message.error(reason.message);
         });
+}
+
+export function createOrder() {
+    if (shoppingCartData.cartItems.length === 0) {
+        return;
+    }
+    createOrderData.setItems(shoppingCartData.cartItems);
+    Router.push("/create-order");
 }

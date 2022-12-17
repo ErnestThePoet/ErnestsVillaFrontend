@@ -21,6 +21,10 @@ class ShoppingCartData {
         this.cartItems = value;
     }
 
+    clear() {
+        this.cartItems = [];
+    }
+
     addCartItem(item: SingleItemPurchaseWish) {
         this.cartItems.push(item);
     }
@@ -35,21 +39,6 @@ class ShoppingCartData {
 
     deleteItem(index: number) {
         this.cartItems.splice(index, 1);
-    }
-
-    getItemTotalPriceYuan(index: number) {
-        return new Decimal(this.cartItems[index].item.priceYuan)
-            .mul(this.cartItems[index].count)
-            .toFixed(2);
-    }
-
-    get totalPriceYuan() {
-        return this.cartItems
-            .reduce(
-                (p, _, i) => p.add(this.getItemTotalPriceYuan(i)),
-                new Decimal(0)
-            )
-            .toFixed(2);
     }
 
     doesItemExist(itemId: number) {

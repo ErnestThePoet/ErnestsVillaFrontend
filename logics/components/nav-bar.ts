@@ -1,6 +1,9 @@
 import axios from "axios";
 import Router from "next/router";
 import APIS from "../../modules/apis";
+import activeOrderData from "../../states/active-order-data";
+import createOrderData from "../../states/create-order-data";
+import shoppingCartData from "../../states/shopping-cart-data";
 import userData from "../../states/user-data";
 
 export const logout = () => {
@@ -12,7 +15,10 @@ export const logout = () => {
 
     localStorage.removeItem("sessionId");
 
-    userData.clearUserData();
+    userData.clear();
+    shoppingCartData.clear();
+    createOrderData.clear();
+    activeOrderData.clear();
 
     Router.push("/");
 };
