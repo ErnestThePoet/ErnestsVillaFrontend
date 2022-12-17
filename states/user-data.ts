@@ -6,17 +6,29 @@ class UserData {
     }
 
     account: string = "";
+    bank1Account: string = "";
+    bank2Account: string = "";
     accessId: string = "";
+
     isLoggedIn: boolean = false;
 
-    setLoginUserData(account: string, accessId: string) {
+    setLoginUserData(
+        account: string,
+        bank1Account: string,
+        bank2Account: string,
+        accessId: string
+    ) {
         this.account = account;
+        this.bank1Account = bank1Account;
+        this.bank2Account = bank2Account;
         this.accessId = accessId;
         this.isLoggedIn = true;
     }
 
     clearUserData() {
         this.account = "";
+        this.bank1Account = "";
+        this.bank2Account = "";
         this.accessId = "";
         this.isLoggedIn = false;
     }

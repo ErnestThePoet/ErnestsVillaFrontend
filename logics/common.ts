@@ -3,9 +3,7 @@ import Router from "next/router";
 import APIS from "../modules/apis";
 import userData from "../states/user-data";
 
-export const fetchCartData = () => {
-    
-}
+export const fetchCartData = () => {};
 
 export const tryAutoLogin = (
     onLogin?: () => void,
@@ -31,6 +29,8 @@ export const tryAutoLogin = (
                 if (res.data.success) {
                     userData.setLoginUserData(
                         res.data.account,
+                        res.data.bank1Account,
+                        res.data.bank2Account,
                         res.data.accessId
                     );
                     if (onLogin !== undefined) {

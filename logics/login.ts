@@ -23,7 +23,12 @@ export const login = (
         })
         .then(res => {
             if (res.data.success) {
-                userData.setLoginUserData(res.data.account, res.data.accessId);
+                userData.setLoginUserData(
+                    res.data.account,
+                    res.data.bank1Account,
+                    res.data.bank2Account,
+                    res.data.accessId
+                );
 
                 if (remember) {
                     localStorage.setItem("sessionId", res.data.sessionId);

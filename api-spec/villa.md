@@ -28,6 +28,8 @@
         success:boolean, 表示是否登陆成功;
         msg:string，错误信息;
         account:string;
+        bank1Account:string;
+        bank2Account:string;
         accessId:string;
         sessionId:string;
     }
@@ -44,6 +46,8 @@
         success:boolean, 表示是否登陆成功;
         msg:string;
         account:string;
+        bank1Account:string;
+        bank2Account:string;
         accessId:string;
     }
 
