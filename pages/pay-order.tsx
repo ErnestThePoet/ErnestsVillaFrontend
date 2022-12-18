@@ -1,10 +1,9 @@
 import Head from "next/head";
 import { observer } from "mobx-react-lite";
-import { Tabs, Result, Spin, Button, Modal } from "antd";
+import { Tabs, Result, Spin, Button, Modal, Empty } from "antd";
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import * as L from "../logics/pay-order";
 import { useEffect, useState } from "react";
-import signupSuccessPageData from "../states/signup-success-page-data";
 import SiteBkg from "../components/site-bkg";
 import activeOrderData from "../states/active-order-data";
 import { tryAutoLogin } from "../logics/common";
@@ -22,7 +21,7 @@ export default observer(function SignupSuccessPage() {
         tryAutoLogin(L.fetchUnpaidPurchase);
 
         return () => {
-            signupSuccessPageData.stopJumpCounter();
+            activeOrderData.stopExpireCounter();
         };
     }, []);
 
@@ -137,7 +136,7 @@ export default observer(function SignupSuccessPage() {
     return (
         <div>
             <Head>
-                <title>云安电子商城 - 支付订单</title>
+                <title>云安电子商城 - 待支付订单</title>
             </Head>
 
             <NavBar />
@@ -151,7 +150,7 @@ export default observer(function SignupSuccessPage() {
                             <Result status="success" title="恭喜您购买成功！" />
                         </div>
                     </div>
-                ) : (
+                ) : activeOrderData.hasUnpaidPurchase ? (
                     <div className={styles.divWrapper}>
                         <div className={styles.divUpper}>
                             <div className={styles.divPaymentInfo}>
@@ -177,14 +176,16 @@ export default observer(function SignupSuccessPage() {
                                 内完成支付，超时订单自动取消
                             </div>
 
-                                <Button
-                                    className={styles.buttonCancelOrder}
+                            <Button
+                                className={styles.buttonCancelOrder}
                                 danger
                                 onClick={() => {
                                     confirm({
                                         title: "取消订单",
                                         icon: <ExclamationCircleFilled />,
                                         content: "确定取消订单吗？",
+                                        okText: "取消订单",
+                                        cancelText: "不取消",
                                         onOk: () => L.cancelOrder()
                                     });
                                 }}>
@@ -201,6 +202,12 @@ export default observer(function SignupSuccessPage() {
                                 <Tabs items={tabItems} centered />
                             </div>
                         )}
+                    </div>
+                ) : (
+                    <div className={styles.divWrapper}>
+                        <div className={styles.divEmptyWrapper}>
+                            <Empty description="无待支付订单" />
+                        </div>
                     </div>
                 )}
             </main>

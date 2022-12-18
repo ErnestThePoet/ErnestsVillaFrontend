@@ -14,7 +14,7 @@ class ActiveOrderData {
 
     sellerPayments: SingleSellerPayment[] = [];
 
-    private expireTime: number = 0;
+    private expireTime: number = -1;
     private expireCounter: number = 0;
 
     private expireCounterTimer: NodeJS.Timer | undefined = undefined;
@@ -39,7 +39,7 @@ class ActiveOrderData {
         this.purchaseId = -1;
         this.totalPriceYuan = "";
         this.totalPriceCents = 0;
-        this.expireTime = 0;
+        this.expireTime = -1;
         this.sellerPayments = [];
     }
 
@@ -49,8 +49,8 @@ class ActiveOrderData {
         }
 
         this.expireCounterTimer = setInterval(() => {
-            this.expireCounter = new Date().getTime() - this.expireTime;
-            if (this.expireCounter <= 0) {
+            this.expireCounter = this.expireTime - new Date().getTime();
+            if (this.expireTime !== -1 && this.expireCounter <= 0) {
                 this.stopExpireCounter();
                 onEnd();
             }
@@ -67,6 +67,10 @@ class ActiveOrderData {
     }
 
     get expireCounterString(): string {
+        if (this.expireTime === -1) {
+            return "--:--";
+        }
+
         const toExpireTime = new Date(this.expireCounter);
         return `${toExpireTime.getUTCMinutes()}分${toExpireTime.getSeconds()}秒`;
     }

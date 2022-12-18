@@ -34,7 +34,6 @@ export function fetchUnpaidPurchase() {
                     activeOrderData.startExpireCounter(onPaymentTimeout);
                 } else {
                     activeOrderData.clear();
-                    Router.push("/");
                 }
             } else {
                 message.error(res.data.msg);
@@ -46,7 +45,27 @@ export function fetchUnpaidPurchase() {
         });
 }
 
-export function cancelOrder() {}
+export function cancelOrder() {
+    axios
+        .delete(APIS.cancelOrder, {
+            params: {
+                accessId: userData.accessId,
+                purchaseId: activeOrderData.purchaseId
+            }
+        })
+        .then(res => {
+            if (res.data.success) {
+                message.info("订单已取消");
+                Router.push("/");
+            } else {
+                message.error(res.data.msg);
+            }
+        })
+        .catch(reason => {
+            console.log(reason);
+            message.error(reason.message);
+        });
+}
 
 export function onPaymentTimeout() {
     axios

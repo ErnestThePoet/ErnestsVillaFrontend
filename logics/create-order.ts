@@ -6,6 +6,25 @@ import shoppingCartData from "../states/shopping-cart-data";
 import type { SetLoadingFn } from "../modules/fn-types";
 import createOrderData from "../states/create-order-data";
 import activeOrderData from "../states/active-order-data";
+import Router from "next/router";
+
+function clearServerShoppingCartData() {
+    axios
+        .delete(APIS.clearUserCart, {
+            params: {
+                accessId: userData.accessId
+            }
+        })
+        .then(res => {
+            if (!res.data.success) {
+                message.error(res.data.msg);
+            }
+        })
+        .catch(reason => {
+            console.log(reason);
+            message.error(reason.message);
+        });
+}
 
 export function submitOrder(
     consigneeName: string,
@@ -38,6 +57,10 @@ export function submitOrder(
 
                 createOrderData.clear();
                 shoppingCartData.clear();
+
+                clearServerShoppingCartData();
+
+                Router.push("/pay-order");
             } else {
                 message.error(res.data.msg);
             }

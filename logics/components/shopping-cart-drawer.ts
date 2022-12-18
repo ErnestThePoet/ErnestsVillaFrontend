@@ -53,5 +53,6 @@ export function createOrder() {
         return;
     }
     createOrderData.setItems(shoppingCartData.cartItems);
+    shoppingCartData.setIsDrawerOpen(false);
     Router.push("/create-order");
 }

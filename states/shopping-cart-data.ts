@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import Decimal from "decimal.js";
 import type { SingleItemPurchaseWish } from "../modules/types";
 
 class ShoppingCartData {
