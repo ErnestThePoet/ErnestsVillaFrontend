@@ -27,7 +27,9 @@ const APIS = {
     addToCart: "customer/add_to_cart",
     deleteFromCart: "customer/delete_from_cart",
     updateCartItemCount: "customer/update_cart_item_count",
-    clearUserCart: "customer/clear_user_cart"
+    clearUserCart: "customer/clear_user_cart",
+
+    createOrder: "customer/create_order"
 };
 
 for (const i in APIS) {

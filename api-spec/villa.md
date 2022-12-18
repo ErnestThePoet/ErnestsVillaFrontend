@@ -308,4 +308,9 @@ interface SingleItemPurchaseWish {
 {
     success:boolean;
     msg:string;
+
+    purchaseId:number;
+    totalPriceYuan:string;
+    totalPriceCents:number;
+    expireTime:number;
 }
