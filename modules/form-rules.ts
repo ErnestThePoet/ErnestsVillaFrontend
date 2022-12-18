@@ -59,8 +59,8 @@ export const BANK_PW_RULES: Rule[] = [
         message: "请输入密码"
     },
     {
-        min: 5,
-        message: "密码长度在5-15之间"
+        min: 4,
+        message: "密码长度在4-15之间"
     },
     {
         max: 15,
@@ -74,8 +74,8 @@ export const BANK_PAYMENT_PW_RULES: Rule[] = [
         message: "请输入支付密码"
     },
     {
-        min: 5,
-        message: "支付密码长度在5-15之间"
+        min: 4,
+        message: "支付密码长度在4-15之间"
     },
     {
         max: 15,

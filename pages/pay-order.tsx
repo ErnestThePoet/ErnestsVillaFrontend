@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { observer } from "mobx-react-lite";
-import { Button, Tabs } from "antd";
+import { Tabs, Result, Spin, Button, Modal } from "antd";
+import { ExclamationCircleFilled } from "@ant-design/icons";
 import * as L from "../logics/pay-order";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import signupSuccessPageData from "../states/signup-success-page-data";
 import SiteBkg from "../components/site-bkg";
 import activeOrderData from "../states/active-order-data";
@@ -15,9 +15,9 @@ import { FormSubmitResult } from "../modules/types";
 import userData from "../states/user-data";
 import SiteFooter from "../components/site-footer";
 
-export default observer(function SignupSuccessPage() {
-    const router = useRouter();
+const { confirm } = Modal;
 
+export default observer(function SignupSuccessPage() {
     useEffect(() => {
         tryAutoLogin(L.fetchUnpaidPurchase);
 
@@ -26,8 +26,13 @@ export default observer(function SignupSuccessPage() {
         };
     }, []);
 
+    const [success, setSuccess] = useState(false);
+
     const [isBank1Pay, setIsBank1Pay] = useState(false);
     const [isBank2Pay, setIsBank2Pay] = useState(false);
+
+    const [bank1AccessId, setBank1AccessId] = useState("");
+    const [bank2AccessId, setBank2AccessId] = useState("");
 
     const [isBank1LoginLoading, setIsBank1LoginLoading] = useState(false);
     const [isBank1PayLoading, setIsBank1PayLoading] = useState(false);
@@ -35,22 +40,22 @@ export default observer(function SignupSuccessPage() {
     const [isBank2PayLoading, setIsBank2PayLoading] = useState(false);
 
     const [bank1LoginResult, setBank1LoginResult] = useState<FormSubmitResult>({
-        success: true,
+        success: false,
         msg: ""
     });
 
     const [bank1PayResult, setBank1PayResult] = useState<FormSubmitResult>({
-        success: true,
+        success: false,
         msg: ""
     });
 
     const [bank2LoginResult, setBank2LoginResult] = useState<FormSubmitResult>({
-        success: true,
+        success: false,
         msg: ""
     });
 
     const [bank2PayResult, setBank2PayResult] = useState<FormSubmitResult>({
-        success: true,
+        success: false,
         msg: ""
     });
 
@@ -68,8 +73,26 @@ export default observer(function SignupSuccessPage() {
                     payLoading={isBank1PayLoading}
                     loginResult={bank1LoginResult}
                     payResult={bank1PayResult}
-                    onLoginFinish={() => {}}
-                    onPayFinish={() => {}}
+                    onLoginFinish={e =>
+                        L.bankLogin(
+                            "YYH",
+                            e.password,
+                            setIsBank1Pay,
+                            setIsBank1LoginLoading,
+                            setBank1LoginResult,
+                            setBank1AccessId
+                        )
+                    }
+                    onPayFinish={e =>
+                        L.bankPay(
+                            "YYH",
+                            bank1AccessId,
+                            e.paymentPassword,
+                            setIsBank1PayLoading,
+                            setBank1PayResult,
+                            setSuccess
+                        )
+                    }
                 />
             )
         },
@@ -86,8 +109,26 @@ export default observer(function SignupSuccessPage() {
                     payLoading={isBank2PayLoading}
                     loginResult={bank2LoginResult}
                     payResult={bank2PayResult}
-                    onLoginFinish={() => {}}
-                    onPayFinish={() => {}}
+                    onLoginFinish={e =>
+                        L.bankLogin(
+                            "HIT",
+                            e.password,
+                            setIsBank2Pay,
+                            setIsBank2LoginLoading,
+                            setBank2LoginResult,
+                            setBank2AccessId
+                        )
+                    }
+                    onPayFinish={e =>
+                        L.bankPay(
+                            "HIT",
+                            bank2AccessId,
+                            e.paymentPassword,
+                            setIsBank2PayLoading,
+                            setBank2PayResult,
+                            setSuccess
+                        )
+                    }
                 />
             )
         }
@@ -104,35 +145,64 @@ export default observer(function SignupSuccessPage() {
             <main className={styles.main}>
                 <SiteBkg />
 
-                <div className={styles.divWrapper}>
-                    <div className={styles.divUpper}>
-                        <div className={styles.divPaymentInfo}>
-                            <div className="order-number">
-                                订单编号：<b>{activeOrderData.purchaseId}</b>
+                {success ? (
+                    <div className={styles.divWrapper}>
+                        <div className={styles.divResultWrapper}>
+                            <Result status="success" title="恭喜您购买成功！" />
+                        </div>
+                    </div>
+                ) : (
+                    <div className={styles.divWrapper}>
+                        <div className={styles.divUpper}>
+                            <div className={styles.divPaymentInfo}>
+                                <div className="order-number">
+                                    订单编号：
+                                    <b>{activeOrderData.purchaseId}</b>
+                                </div>
+
+                                <div className="price">
+                                    待支付：
+                                    <span className="price-value">
+                                        <em>￥</em>
+                                        {activeOrderData.totalPriceYuan}
+                                    </span>
+                                </div>
                             </div>
 
-                            <div className="price">
-                                待支付：
-                                <span className="price-value">
-                                    <em>￥</em>
-                                    {activeOrderData.totalPriceYuan}
+                            <div className={styles.divExpireCounter}>
+                                请在
+                                <span className="expire-time">
+                                    {activeOrderData.expireCounterString}
                                 </span>
+                                内完成支付，超时订单自动取消
                             </div>
+
+                                <Button
+                                    className={styles.buttonCancelOrder}
+                                danger
+                                onClick={() => {
+                                    confirm({
+                                        title: "取消订单",
+                                        icon: <ExclamationCircleFilled />,
+                                        content: "确定取消订单吗？",
+                                        onOk: () => L.cancelOrder()
+                                    });
+                                }}>
+                                取消订单
+                            </Button>
                         </div>
 
-                        <div className={styles.divExpireCounter}>
-                            请在
-                            <span className="expire-time">
-                                {activeOrderData.expireCounterString}
-                            </span>
-                            内完成支付，超时订单自动取消
-                        </div>
+                        {bank1PayResult.success || bank2PayResult.success ? (
+                            <div className={styles.divSpinWrapper}>
+                                <Spin size="large" />
+                            </div>
+                        ) : (
+                            <div className={styles.divFormWrapper}>
+                                <Tabs items={tabItems} centered />
+                            </div>
+                        )}
                     </div>
-
-                    <div className={styles.divFormWrapper}>
-                        <Tabs items={tabItems} centered />
-                    </div>
-                </div>
+                )}
             </main>
 
             <SiteFooter />

@@ -1,9 +1,7 @@
 import axios from "axios";
-import type {
-    BankAccountBindResult
-} from "../../../modules/types";
+import type { BankAccountBindResult } from "../../../modules/types";
 import { message } from "antd";
-import { BANK1_APIS, BANK2_APIS } from "../../../modules/bank-apis";
+import { getBankApis } from "../../../modules/bank-apis";
 import { BANK_MONKING } from "../../../modules/url-env.mjs";
 import type {
     SetFormSubmitResultFn,
@@ -34,8 +32,10 @@ export function submitBank1Bind(
 
     setIsLoading(true);
 
+    const BANK_APIS = getBankApis("YYH");
+
     axios
-        .postForm(BANK1_APIS.auth, {
+        .postForm(BANK_APIS.auth, {
             account,
             password,
             paymentPassword
@@ -97,8 +97,10 @@ export function submitBank2Bind(
 
     setIsLoading(true);
 
+    const BANK_APIS = getBankApis("HIT");
+
     axios
-        .postForm(BANK2_APIS.auth, {
+        .postForm(BANK_APIS.auth, {
             account,
             password,
             paymentPassword

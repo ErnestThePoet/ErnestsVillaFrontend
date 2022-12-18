@@ -20,7 +20,7 @@
     box-shadow: 0 6px 20px 0 rgb(37 43 50 / 10%);
 }
 
-.divUpper{
+.divUpper {
     display: flex;
     align-items: center;
 }
@@ -58,4 +58,17 @@
     margin: 60px auto 60px;
 
     width: 300px;
+}
+
+.divResultWrapper {
+    margin: 100px 0;
+}
+
+.divSpinWrapper {
+    width: fit-content;
+    margin: 175px auto;
+}
+
+.buttonCancelOrder {
+    margin-left: auto;
 }
