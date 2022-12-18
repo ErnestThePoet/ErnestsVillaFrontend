@@ -378,3 +378,30 @@ interface SingleItemPurchaseWish {
     success:boolean;
     msg:string;
 }
+
+interface SinglePurchasedItemDetail {
+    purchaseId: number;
+    sellerAccount: string;
+    itemId: number;
+    count: number;
+    paymentYuan: string;
+    purchaseTime: number;
+
+    name: string;
+    previewImageFileName: string;
+}
+
+#### 获取所有订单
+* 请求方法：GET
+* 请求参数：表单
+{
+    accessId:string;
+}
+* 返回类型：json
+* 返回格式：
+{
+    success:boolean;
+    msg:string;
+
+    purchasedItemDetails:Array<SinglePurchasedItemDetail>;
+}

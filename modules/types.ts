@@ -43,3 +43,15 @@ export interface SingleSellerPayment {
     totalPriceYuan: string;
     totalPriceCents: number;
 }
+
+export interface SinglePurchasedItemDetail {
+    purchaseId: number;
+    sellerAccount: string;
+    itemId: number;
+    count: number;
+    paymentYuan: string;
+    purchaseTime: number;
+
+    name: string;
+    previewImageFileName: string;
+}

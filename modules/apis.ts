@@ -32,7 +32,9 @@ const APIS = {
     getUnpaidPurchase: "customer/get_unpaid_purchase",
     createOrder: "customer/create_order",
     cancelOrder: "customer/cancel_order",
-    confirmOrder: "customer/confirm_order"
+    confirmOrder: "customer/confirm_order",
+
+    getPurchases: "customer/get_purchases"
 };
 
 for (const i in APIS) {

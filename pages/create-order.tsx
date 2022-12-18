@@ -19,7 +19,7 @@ import {
     CONSIGNEE_NAME_RULES,
     CONSIGNEE_PHONE_NUMBER_RULES
 } from "../modules/form-rules";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 const columns: ColumnsType<SingleItemPurchaseWish> = [
     {
@@ -51,9 +51,11 @@ const columns: ColumnsType<SingleItemPurchaseWish> = [
 ];
 
 export default observer(function CreateOrderPage() {
+    const router = useRouter();
+
     useEffect(() => {
         if (createOrderData.items.length === 0) {
-            Router.push("/");
+            router.push("/");
         } else {
             tryAutoLogin();
         }

@@ -68,7 +68,7 @@ export default observer(function NavBar() {
 
             <Divider className="divider" type="vertical" />
 
-            <Link className="href" href="/publish-item">
+            <Link className="href" href="/all-orders">
                 全部订单
             </Link>
         </nav>

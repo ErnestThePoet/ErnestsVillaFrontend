@@ -1,10 +1,13 @@
 import { useRouter } from "next/router";
 import CDNS, { getCdnUrl } from "../modules/cdns";
-import type { SingleItemDetail } from "../modules/types";
+import type {
+    SingleItemDetail,
+    SinglePurchasedItemDetail
+} from "../modules/types";
 import styles from "../styles/components/single-order-item.module.scss";
 
 interface SingleOrderItemProps {
-    item: SingleItemDetail;
+    item: SingleItemDetail | SinglePurchasedItemDetail;
 }
 
 export default function SingleOrderItem(props: SingleOrderItemProps) {
