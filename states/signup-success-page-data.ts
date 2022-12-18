@@ -28,7 +28,7 @@ class SignupSuccessPageData {
         this.jumpCounter = 10;
         this.jumpCounterTimer = setInterval(() => {
             this.jumpCounter--;
-            if (this.jumpCounter === 0) {
+            if (this.jumpCounter <= 0) {
                 this.stopJumpCounter();
                 onEnd();
             }

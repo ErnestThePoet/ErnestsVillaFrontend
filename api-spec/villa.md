@@ -290,6 +290,32 @@ interface SingleItemPurchaseWish {
     msg:string;
 }
 
+#### 获取待支付订单
+* 请求方法：GET
+* 请求参数：
+{
+    accessId:string;
+}
+* 返回类型：json
+* 返回格式：
+{
+    success:boolean;
+    msg:string;
+
+    hasUnpaidPurchase:boolean;
+
+    purchaseId:number;
+    totalPriceYuan:string;
+    totalPriceCents:number;
+    expireTime:number;
+    
+    sellerPayments:Array<{
+        sellerAccount:string;
+        totalPriceYuan:string;
+        totalPriceCents:number;
+    }>;
+}
+
 #### 创建订单
 * 请求方法：POST
 * 请求参数：
@@ -313,4 +339,42 @@ interface SingleItemPurchaseWish {
     totalPriceYuan:string;
     totalPriceCents:number;
     expireTime:number;
+
+    sellerPayments:Array<{
+        sellerAccount:string;
+        totalPriceYuan:string;
+        totalPriceCents:number;
+    }>;
+}
+
+#### 取消订单
+* 请求方法：DELETE
+* 请求参数：表单
+{
+    accessId:string;
+    purchaseId:number;
+}
+* 返回类型：json
+* 返回格式：
+{
+    success:boolean;
+    msg:string;
+}
+
+#### 付款完成后完成订单
+* 请求方法：POST
+* 请求参数：表单
+{
+    accessId:string;
+    purchaseId:number;(OI)
+
+    timeStamp:string;(OI)
+    pimd:string; Base64编码的PIMD
+    ds:string; Base64编码的DS
+}
+* 返回类型：json
+* 返回格式：
+{
+    success:boolean;
+    msg:string;
 }

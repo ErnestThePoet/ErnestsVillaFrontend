@@ -1,0 +1,61 @@
+@import "./common/config";
+@import "./common/theme";
+
+.main {
+    width: 100vw;
+
+    padding: 30px 50px;
+}
+
+.divWrapper {
+    width: 100%;
+
+    padding: 40px 100px;
+    padding-bottom: 20px;
+
+    background-color: white;
+
+    border-radius: 18px;
+
+    box-shadow: 0 6px 20px 0 rgb(37 43 50 / 10%);
+}
+
+.divUpper{
+    display: flex;
+    align-items: center;
+}
+
+.divPaymentInfo {
+    font-family: sans-serif;
+    font-size: 16px;
+
+    > div[class~="price"] {
+        > span[class~="price-value"] {
+            font-size: 26px;
+            color: rgb(255, 0, 54);
+
+            > em {
+                font-size: 16px;
+                font-style: normal;
+            }
+        }
+    }
+}
+
+.divExpireCounter {
+    font-family: sans-serif;
+    font-size: 16px;
+
+    margin-left: 60px;
+
+    > span[class~="expire-time"] {
+        color: $theme-red;
+        font-size: 20px;
+    }
+}
+
+.divFormWrapper {
+    margin: 60px auto 60px;
+
+    width: 300px;
+}

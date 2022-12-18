@@ -29,7 +29,10 @@ const APIS = {
     updateCartItemCount: "customer/update_cart_item_count",
     clearUserCart: "customer/clear_user_cart",
 
-    createOrder: "customer/create_order"
+    getUnpaidPurchase: "customer/get_unpaid_purchase",
+    createOrder: "customer/create_order",
+    cancelOrder: "customer/cancel_order",
+    confirmOrder: "customer/confirm_order"
 };
 
 for (const i in APIS) {

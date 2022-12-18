@@ -1,4 +1,4 @@
-export interface FormSubmitResult{
+export interface FormSubmitResult {
     success: boolean;
     msg: string;
 }
@@ -36,4 +36,10 @@ export interface BankAccountBindResult {
 
     bank2Success?: boolean;
     bank2Account?: string;
+}
+
+export interface SingleSellerPayment {
+    sellerAccount: string;
+    totalPriceYuan: string;
+    totalPriceCents: number;
 }

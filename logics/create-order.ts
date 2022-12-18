@@ -30,14 +30,11 @@ export function submitOrder(
         .then(res => {
             if (res.data.success) {
                 activeOrderData.setData(
-                    createOrderData.items,
-                    consigneeAddress,
-                    consigneeName,
-                    consigneePhoneNumber,
                     res.data.purchaseId,
                     res.data.totalPriceYuan,
                     res.data.totalPriceCents,
-                    res.data.expireTime
+                    res.data.expireTime,
+                    res.data.sellerPayments
                 );
 
                 createOrderData.clear();
