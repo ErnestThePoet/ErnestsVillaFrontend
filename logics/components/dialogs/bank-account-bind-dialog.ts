@@ -1,18 +1,21 @@
 import axios from "axios";
 import type {
-    FormSubmitResult,
     BankAccountBindResult
 } from "../../../modules/types";
 import { message } from "antd";
 import { BANK1_APIS, BANK2_APIS } from "../../../modules/bank-apis";
 import { BANK_MONKING } from "../../../modules/url-env.mjs";
+import type {
+    SetFormSubmitResultFn,
+    SetLoadingFn
+} from "../../../modules/fn-types";
 
 export function submitBank1Bind(
     account: string,
     password: string,
     paymentPassword: string,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    setResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>,
+    setIsLoading: SetLoadingFn,
+    setResult: SetFormSubmitResultFn,
     setBindResult: (result: BankAccountBindResult) => void
 ) {
     if (BANK_MONKING) {
@@ -74,8 +77,8 @@ export function submitBank2Bind(
     account: string,
     password: string,
     paymentPassword: string,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    setResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>,
+    setIsLoading: SetLoadingFn,
+    setResult: SetFormSubmitResultFn,
     setBindResult: (result: BankAccountBindResult) => void
 ) {
     if (BANK_MONKING) {

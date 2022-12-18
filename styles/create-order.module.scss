@@ -19,15 +19,60 @@
 
     box-shadow: 0 6px 20px 0 rgb(37 43 50 / 10%);
 
-    > div[class~="title"] {
+    > div[class~="label"] {
         font-family: sans-serif;
         font-size: 14px;
         font-weight: bold;
 
+        margin-left: 20px;
         margin-bottom: 10px;
     }
 
-    button[type="submit"] {
-        background-color: #f05355;
+    > div[class~="consignee-info-label"] {
+        margin-top: 20px;
+    }
+}
+
+.divWrapperLower {
+    display: flex;
+
+    [class~="form-consignee-info"] {
+        width: 800px;
+
+        [class~="in-short"] {
+            width: 200px;
+        }
+    }
+
+    > div[class~="lower-right"] {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        margin-left: 60px;
+
+        > div[class~="lower-right-lower"] {
+            margin-bottom: 24px;
+
+            > div[class~="total-price"] {
+                width: 200px;
+
+                margin-bottom: 10px;
+
+                > span[class~="total-price-label"] {
+                    font-weight: bold;
+                }
+
+                > span[class~="total-price-value"] {
+                    font-size: 26px;
+                    color: rgb(255, 0, 54);
+
+                    > em {
+                        font-size: 16px;
+                        font-style: normal;
+                    }
+                }
+            }
+        }
     }
 }

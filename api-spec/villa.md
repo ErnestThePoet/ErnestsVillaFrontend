@@ -292,13 +292,16 @@ interface SingleItemPurchaseWish {
 
 #### 创建订单
 * 请求方法：POST
-* 请求参数：表单
+* 请求参数：
 {
     accessId:string;
     items:Array<{
         itemId:number;
         count:number;
-    }>
+    }>;
+    consigneeName:string;
+    consigneeAddress:string;
+    consigneePhoneNumber:string;
 }
 * 返回类型：json
 * 返回格式：

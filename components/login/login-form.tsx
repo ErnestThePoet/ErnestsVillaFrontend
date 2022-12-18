@@ -3,14 +3,18 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import * as RULES from "../../modules/form-rules";
 import type { FormSubmitResult } from "../../modules/types";
+import type {
+    SetFormSubmitResultFn,
+    SetLoadingFn
+} from "../../modules/fn-types";
 
 interface LoginFormProps {
     onFinish: (
         account: string,
         password: string,
         remember: boolean,
-        setIsLoggingIn: React.Dispatch<React.SetStateAction<boolean>>,
-        setLoginResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
+        setIsLoggingIn: SetLoadingFn,
+        setLoginResult: SetFormSubmitResultFn
     ) => void;
 }
 

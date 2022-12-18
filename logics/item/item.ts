@@ -4,12 +4,13 @@ import { message } from "antd";
 import userData from "../../states/user-data";
 import type { SingleItemDetail } from "../../modules/types";
 import shoppingCartData from "../../states/shopping-cart-data";
+import type {
+    SetStateFn
+} from "../../modules/fn-types";
 
 export function getItemDetail(
     itemId: number,
-    setDetail: React.Dispatch<
-        React.SetStateAction<SingleItemDetail | undefined>
-    >
+    setDetail: SetStateFn<SingleItemDetail | undefined>
 ) {
     axios
         .get(APIS.getItemDetail, {

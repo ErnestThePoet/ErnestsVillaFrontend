@@ -2,7 +2,10 @@ import axios from "axios";
 import APIS from "../modules/apis";
 import userData from "../states/user-data";
 import { message } from "antd";
-import type { FormSubmitResult } from "../modules/types";
+import type {
+    SetFormSubmitResultFn,
+    SetLoadingFn
+} from "../modules/fn-types";
 
 export function publishItem(
     name: string,
@@ -10,8 +13,8 @@ export function publishItem(
     previewImageFileName: string,
     remaining: number,
     priceYuan: string,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    setFormResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
+    setIsLoading: SetLoadingFn,
+    setFormResult: SetFormSubmitResultFn
 ) {
     if (previewImageFileName === "") {
         setFormResult({

@@ -7,6 +7,10 @@ import type {
     FormSubmitResult
 } from "../../modules/types";
 import { BankAccountBindDialog } from "../dialogs/bank-account-bind-dialog";
+import type {
+    SetFormSubmitResultFn,
+    SetLoadingFn
+} from "../../modules/fn-types";
 
 interface SignupFormProps {
     onFinish: (
@@ -14,8 +18,8 @@ interface SignupFormProps {
         password: string,
         passwordConfirm: string,
         bankAccountBindResult: BankAccountBindResult,
-        setIsSigningUp: React.Dispatch<React.SetStateAction<boolean>>,
-        setSignupResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
+        setIsSigningUp: SetLoadingFn,
+        setSignupResult: SetFormSubmitResultFn
     ) => void;
 }
 

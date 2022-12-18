@@ -3,15 +3,16 @@ import Router from "next/router";
 import APIS from "../modules/apis";
 import userData from "../states/user-data";
 import { message } from "antd";
-import type { BankAccountBindResult, FormSubmitResult } from "../modules/types";
+import type { BankAccountBindResult } from "../modules/types";
 import signupSuccessPageData from "../states/signup-success-page-data";
+import type { SetFormSubmitResultFn, SetLoadingFn } from "../modules/fn-types";
 
 export const login = (
     account: string,
     password: string,
     remember: boolean,
-    setIsLoggingIn: React.Dispatch<React.SetStateAction<boolean>>,
-    setLoginResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
+    setIsLoggingIn: SetLoadingFn,
+    setLoginResult: SetFormSubmitResultFn
 ) => {
     setIsLoggingIn(true);
 
@@ -59,8 +60,8 @@ export const signup = (
     password: string,
     passwordConfirm: string,
     bankAccountBindResult: BankAccountBindResult,
-    setIsSigningUp: React.Dispatch<React.SetStateAction<boolean>>,
-    setSignupResult: React.Dispatch<React.SetStateAction<FormSubmitResult>>
+    setIsSigningUp: SetLoadingFn,
+    setSignupResult: SetFormSubmitResultFn
 ) => {
     if (password !== passwordConfirm) {
         setSignupResult({
