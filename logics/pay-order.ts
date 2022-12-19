@@ -112,9 +112,11 @@ export function bankLogin(
 
     const BANK_APIS = getBankApis(bank);
     const postFunction = bank === "YYH" ? axios.postForm : axios.post;
+    const account =
+        bank === "YYH" ? userData.bank1Account : userData.bank2Account;
 
     postFunction(BANK_APIS.login, {
-        account: userData.bank1Account,
+        account,
         password
     })
         .then(res => {
@@ -192,11 +194,14 @@ export function bankPay(
 
         const dsBase64: string = CryptoES.enc.Base64.stringify(pomd);
 
+        const payeeAccount =
+            bank === "YYH" ? i.sellerBank1Account : i.sellerBank2Account;
+
         payPromises.push(
             postFunction(BANK_APIS.pay, {
                 accessId: bankAccessId,
                 paymentPassword,
-                payeeAccount: i.sellerAccount,
+                payeeAccount,
                 timeStamp,
                 cents: i.totalPriceCents,
                 oimd: oimdBase64,

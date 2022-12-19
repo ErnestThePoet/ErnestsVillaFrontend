@@ -1,9 +1,9 @@
 import { WITH_TLS_PROXY } from "./url-env.mjs";
 
-let cdnBase = "http://localhost:17570/cdn/";
+let cdnBase = "http://localhost:8080/cdn/";
 
 if (WITH_TLS_PROXY) {
-    cdnBase = "http://market.yinkstudio.xyz:17750/cdn/";
+    cdnBase = "/cdn/";
 }
 
 const CDNS = {

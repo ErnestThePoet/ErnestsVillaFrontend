@@ -40,6 +40,8 @@ export interface BankAccountBindResult {
 
 export interface SingleSellerPayment {
     sellerAccount: string;
+    sellerBank1Account: string;
+    sellerBank2Account: string;
     totalPriceYuan: string;
     totalPriceCents: number;
 }

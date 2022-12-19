@@ -290,6 +290,14 @@ interface SingleItemPurchaseWish {
     msg:string;
 }
 
+interface SingleSellerPayment {
+    sellerAccount: string;
+    sellerBank1Account: string;
+    sellerBank2Account: string;
+    totalPriceYuan: string;
+    totalPriceCents: number;
+}
+
 #### 获取待支付订单
 * 请求方法：GET
 * 请求参数：url
@@ -309,11 +317,7 @@ interface SingleItemPurchaseWish {
     totalPriceCents:number;
     expireTime:number;
     
-    sellerPayments:Array<{
-        sellerAccount:string;
-        totalPriceYuan:string;
-        totalPriceCents:number;
-    }>;
+    sellerPayments:Array<SingleSellerPayment>;
 }
 
 #### 创建订单
@@ -340,11 +344,7 @@ interface SingleItemPurchaseWish {
     totalPriceCents:number;
     expireTime:number;
 
-    sellerPayments:Array<{
-        sellerAccount:string;
-        totalPriceYuan:string;
-        totalPriceCents:number;
-    }>;
+    sellerPayments:Array<SingleSellerPayment>;
 }
 
 #### 取消订单
