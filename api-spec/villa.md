@@ -129,7 +129,7 @@
 
 #### 删除商品
 * 请求方法：DELETE
-* 请求参数：表单
+* 请求参数：url
     {
         accessId:string;
         itemId:number;
@@ -250,7 +250,7 @@ interface SingleItemPurchaseWish {
 
 #### 从购物车中删除
 * 请求方法：DELETE
-* 请求参数：表单
+* 请求参数：url
 {
     accessId:string;
     id:number;
@@ -279,7 +279,7 @@ interface SingleItemPurchaseWish {
 
 #### 清空用户购物车
 * 请求方法：DELETE
-* 请求参数：表单
+* 请求参数：url
 {
     accessId:string;
 }
@@ -292,7 +292,7 @@ interface SingleItemPurchaseWish {
 
 #### 获取待支付订单
 * 请求方法：GET
-* 请求参数：
+* 请求参数：url
 {
     accessId:string;
 }
@@ -349,7 +349,7 @@ interface SingleItemPurchaseWish {
 
 #### 取消订单
 * 请求方法：DELETE
-* 请求参数：表单
+* 请求参数：url
 {
     accessId:string;
     purchaseId:number;
@@ -393,7 +393,7 @@ interface SinglePurchasedItemDetail {
 
 #### 获取所有订单
 * 请求方法：GET
-* 请求参数：表单
+* 请求参数：url
 {
     accessId:string;
 }
