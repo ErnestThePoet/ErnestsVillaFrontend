@@ -100,7 +100,7 @@ export function submitBank2Bind(
     const BANK_APIS = getBankApis("HIT");
 
     axios
-        .postForm(BANK_APIS.auth, {
+        .post(BANK_APIS.auth, {
             account,
             password,
             paymentPassword

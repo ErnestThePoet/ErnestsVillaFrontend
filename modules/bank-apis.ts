@@ -1,7 +1,7 @@
 import { Bank } from "./types.js";
 import { WITH_TLS_PROXY } from "./url-env.mjs";
 
-let bank1UrlPrefix = "http://bank1.yinkstudio.xyz:17570/api/";
+let bank1UrlPrefix = "http://bank1.yinkstudio.xyz:11451/api/";
 let bank2UrlPrefix = "http://bank2.yinkstudio.xyz:17570/api/";
 
 if (WITH_TLS_PROXY) {

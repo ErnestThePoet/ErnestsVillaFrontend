@@ -111,12 +111,12 @@ export function bankLogin(
     setLoading(true);
 
     const BANK_APIS = getBankApis(bank);
+    const postFunction = bank === "YYH" ? axios.postForm : axios.post;
 
-    axios
-        .postForm(BANK_APIS.login, {
-            account: userData.bank1Account,
-            password
-        })
+    postFunction(BANK_APIS.login, {
+        account: userData.bank1Account,
+        password
+    })
         .then(res => {
             if (res.data.success) {
                 setAccessId(res.data.accessId);
@@ -150,6 +150,7 @@ export function bankPay(
     setLoading(true);
 
     const BANK_APIS = getBankApis(bank);
+    const postFunction = bank === "YYH" ? axios.postForm : axios.post;
 
     const payPromises: Promise<AxiosResponse>[] = [];
 
@@ -192,7 +193,7 @@ export function bankPay(
         const dsBase64: string = CryptoES.enc.Base64.stringify(pomd);
 
         payPromises.push(
-            axios.postForm(BANK_APIS.pay, {
+            postFunction(BANK_APIS.pay, {
                 accessId: bankAccessId,
                 paymentPassword,
                 payeeAccount: i.sellerAccount,
