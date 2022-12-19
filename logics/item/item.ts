@@ -4,9 +4,9 @@ import { message } from "antd";
 import userData from "../../states/user-data";
 import type { SingleItemDetail } from "../../modules/types";
 import shoppingCartData from "../../states/shopping-cart-data";
-import type {
-    SetStateFn
-} from "../../modules/fn-types";
+import type { SetStateFn } from "../../modules/fn-types";
+import createOrderData from "../../states/create-order-data";
+import Router from "next/router";
 
 export function getItemDetail(
     itemId: number,
@@ -58,4 +58,15 @@ export function addToCart(detail: SingleItemDetail, count: number) {
             console.log(reason);
             message.error(reason.message);
         });
+}
+
+export function buyNow(item: SingleItemDetail, count: number) {
+    createOrderData.setItems([
+        {
+            id: -1,
+            item,
+            count
+        }
+    ]);
+    Router.push("/create-order");
 }

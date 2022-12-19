@@ -128,7 +128,11 @@ export default function ItemPage() {
                                         </div>
                                     ) : detail.remaining > 0 ? (
                                         <div className="buttons">
-                                            <button className="buy">
+                                            <button
+                                                className="buy"
+                                                onClick={() =>
+                                                    L.buyNow(detail, count)
+                                                }>
                                                 立即购买
                                             </button>
                                             <button
