@@ -95,3 +95,26 @@
     success:boolean, 表示是否成功;
     msg:string，错误信息;
 }
+
+#### 获取转账记录
+* url:/api/transactions
+* 请求方法：POST
+* 请求参数：表单
+{
+    accessId:string;
+}
+* 返回类型：JSON
+* 返回格式：
+{
+    success:boolean, 表示是否成功;
+    msg:string，错误信息;
+
+    transactions:Array<{
+        id:number;
+        time:number;
+        balanceDiffCents:number;
+        
+        oppositeAccount:string;
+        description:string;
+    }>
+}
