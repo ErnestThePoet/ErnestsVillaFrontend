@@ -26,6 +26,7 @@ import CDNS, { getCdnUrl } from "../modules/cdns";
 import type { FormSubmitResult } from "../modules/types";
 import PageHeaderSingleText from "../components/page-header-single-text";
 import { ORANGE } from "../styles/common/theme";
+import { ITEM_DESCRIPTION_RULES, ITEM_NAME_RULES } from "../modules/form-rules";
 
 export default function PublishItemPage() {
     useEffect(() => {
@@ -152,24 +153,14 @@ export default function PublishItemPage() {
                                         <Form.Item
                                             name="name"
                                             label="商品名称"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "请输入商品名称"
-                                                }
-                                            ]}>
+                                            rules={ITEM_NAME_RULES}>
                                             <Input className="in-name" />
                                         </Form.Item>
 
                                         <Form.Item
                                             name="description"
                                             label="商品描述"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "请输入商品描述"
-                                                }
-                                            ]}>
+                                            rules={ITEM_DESCRIPTION_RULES}>
                                             <Input.TextArea className="in-description" />
                                         </Form.Item>
                                     </Col>
@@ -184,7 +175,11 @@ export default function PublishItemPage() {
                                                     message: "请输入商品库存量"
                                                 }
                                             ]}>
-                                            <InputNumber size="large" min={1} />
+                                            <InputNumber
+                                                size="large"
+                                                min={1}
+                                                max={10000000}
+                                            />
                                         </Form.Item>
 
                                         <Form.Item

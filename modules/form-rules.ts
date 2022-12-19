@@ -83,6 +83,28 @@ export const BANK_PAYMENT_PW_RULES: Rule[] = [
     }
 ];
 
+export const ITEM_NAME_RULES: Rule[] = [
+    {
+        required: true,
+        message: "请输入商品名称"
+    },
+    {
+        max: 50,
+        message: "商品名称最大长度为50"
+    }
+];
+
+export const ITEM_DESCRIPTION_RULES: Rule[] = [
+    {
+        required: true,
+        message: "请输入商品描述"
+    },
+    {
+        max: 1000,
+        message: "商品描述最大长度为1000"
+    }
+];
+
 export const CONSIGNEE_NAME_RULES: Rule[] = [
     {
         required: true,
