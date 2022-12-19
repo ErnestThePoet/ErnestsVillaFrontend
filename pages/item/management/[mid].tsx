@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, ExclamationCircleFilled } from "@ant-design/icons";
 import {
     ConfigProvider,
     Empty,
@@ -12,6 +12,7 @@ import {
     Col,
     Button,
     Result,
+    Modal,
     message,
     Space
 } from "antd";
@@ -33,6 +34,8 @@ import PageHeaderSingleText from "../../../components/page-header-single-text";
 import { ORANGE } from "../../../styles/common/theme";
 import { useRouter } from "next/router";
 import userData from "../../../states/user-data";
+
+const { confirm } = Modal;
 
 export default function ManageItemPage() {
     const router = useRouter();
@@ -271,11 +274,23 @@ export default function ManageItemPage() {
                                                         block
                                                         loading={loading}
                                                         onClick={() =>
-                                                            L.deleteItem(
-                                                                itemId,
-                                                                setLoading,
-                                                                setFormResult
-                                                            )
+                                                            confirm({
+                                                                title: "删除商品",
+                                                                icon: (
+                                                                    <ExclamationCircleFilled />
+                                                                ),
+                                                                content:
+                                                                    "确定删除商品吗？",
+                                                                okText: "继续删除",
+                                                                cancelText:
+                                                                    "取消",
+                                                                onOk: () =>
+                                                                    L.deleteItem(
+                                                                        itemId,
+                                                                        setLoading,
+                                                                        setFormResult
+                                                                    )
+                                                            })
                                                         }>
                                                         删除商品
                                                     </Button>

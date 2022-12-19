@@ -179,7 +179,7 @@ export default observer(function SignupSuccessPage() {
                             <Button
                                 className={styles.buttonCancelOrder}
                                 danger
-                                onClick={() => {
+                                onClick={() =>
                                     confirm({
                                         title: "取消订单",
                                         icon: <ExclamationCircleFilled />,
@@ -187,8 +187,8 @@ export default observer(function SignupSuccessPage() {
                                         okText: "取消订单",
                                         cancelText: "不取消",
                                         onOk: () => L.cancelOrder()
-                                    });
-                                }}>
+                                    })
+                                }>
                                 取消订单
                             </Button>
                         </div>
